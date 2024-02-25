@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'client',
     'ckeditor',
     'ckeditor_uploader',
-    'django_resized',
     'media',
     'partnership',
     'blog',
