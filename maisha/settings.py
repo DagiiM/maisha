@@ -75,7 +75,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'htmlmin.middleware.HtmlMinifyMiddleware',
 ]
 
 ROOT_URLCONF = 'maisha.urls'
