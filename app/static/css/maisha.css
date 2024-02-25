@@ -1,0 +1,1101 @@
+:root {
+    --grid-cols-xs: 1;
+    --grid-cols-sm: 2;
+    --grid-cols-md: 3;
+    --grid-cols-lg: 4;
+    --grid-cols-xl: 4;
+    --grid-gap-xs: 0.25rem;
+    --grid-gap-sm: 0.5rem;
+    --grid-gap-md: 0.75rem;
+    --grid-gap-lg: 1rem;
+    --grid-gap-xl: 1.25rem;
+
+    --flex-gap:1rem;
+    
+    --util-scale:0.25;
+    --util-max-size:1;
+
+    --util-size-1:0.25rem;
+    --util-size-2:0.5rem;
+    --util-size-3:0.75rem;
+    --util-size-4:1rem; 
+
+    /* Font Design */
+    --font-size-small: 0.875rem; /* 14px / 16px */
+    --font-size-medium: 1rem; /* 16px / 16px */
+    --font-size-large: 1.125rem; /* 18px / 16px */
+
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+
+    --letter-spacing-normal: 0.05em;
+    --letter-spacing-wide: 0.1em;
+
+    --line-height-normal: 1.5;
+    --line-height-tight: 1.2;
+
+    --ff:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-casual-family: var(--ff);
+    --font-modern-family: var(--ff);
+    --font-fancy-family: var(--ff);
+    --font-executive-family: var(--ff);
+    --font-subtle-family: var(--ff);
+    --font-subtle-family: var(--ff);
+
+    --z_index_modal:1005;
+
+    --pink:pink;
+    --yellow:yellow;
+    --green-yellow:greenyellow;
+    --lightblue: #6d6dd7;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    /* Use the dark theme object as the default theme */
+    :root {
+      --theme-primary: #BF4F74;
+      --theme-secondary: #212121;
+      --theme-secondary-light:#181818;
+      --theme-secondary-lighter:#373636;
+      --theme-secondary-loader: #373636d1;
+      --theme-accent: #e15e06;
+      --theme-accent-alt:#d35400;
+      --theme-dark: #e9e7e7;
+      --theme-dark-light:#eee5e5;
+      --theme-light: #32404e;
+
+      --shadow-color-dark: rgba(156, 165, 191, 0.3);
+      --shadow-color-light: rgba(156, 165, 191, 0.15);
+      --hover-shadow-color: rgba(255, 255, 255, 0.25);
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    /* Use the light theme object as the default theme */
+    :root {
+      --theme-primary: #c93492;
+      --theme-secondary: #F7F7F7;
+      --theme-secondary-light:#f9f4f4d9;
+      --theme-secondary-lighter:#fff;
+      --theme-secondary-loader: #ffffff6e;
+      --theme-accent: #e15e06;
+      --theme-accent-alt:#d35400;
+      --theme-dark: #383838;
+      --theme-dark-light:#32404e;
+      --theme-light: #FFFFFF;
+
+      --shadow-color-dark: rgba(60, 64, 67, 0.3);
+      --shadow-color-light: rgba(60, 64, 67, 0.15);
+      --hover-shadow-color: rgba(0, 0, 0, 0.25);
+    }
+  }
+
+/*
+ * Basic Reset
+ */
+ * {
+    padding: 0;
+    margin: 0;
+  }
+
+  /**
+    * Themes
+    */
+.eleso-theme-secondary-light{
+    background-color: var(--theme-secondary-light);
+}
+.eleso-theme-secondary-lighter{
+    background-color: var(--theme-secondary-lighter);
+}
+/*
+ * Layout Styles 
+ */
+body{
+    transition: all 1s ease-in-out; 
+    background-color: var(--theme-secondary);
+    font-family:"Averta",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+a, abbr, acronym, address, applet, b, big, blockquote, body, caption, center, cite, code, dd, del, dfn, div, dl, dt, em, fieldset, font, form, h1, h2, h3, h4, h5, h6, html, i, iframe, img, ins, kbd, label, legend, li, object, ol, p, pre, q, s, samp, small, span, strike, strong, sub, sup, table, tbody, td, tfoot, th, thead, tr, tt, u, ul, var {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+.eleso-app-layout{
+    display: grid;
+    grid-template-areas:"header" "main" "footer";
+}
+header{
+  grid-area: header;
+}
+
+header i.icon-cancel{
+  display: none;
+}
+
+.eleso-mobile-nav{
+  display: none !important;
+}
+.eleso-mobile-nav-active{
+  display: block !important;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:10000;
+  height:100%;
+  flex-direction: column;
+  width: fit-content;
+}
+.active{
+  display: flex !important;
+  cursor: pointer;
+}
+header i.icon-menu{
+  display: none;
+}
+
+@media (max-width:768px){
+  header i.icon-menu{
+    display: grid;
+    cursor: pointer;
+  }
+  header .nav-middle{
+    display: none !important;
+  }
+  header .nav-right{
+    width: 98%;
+    display: grid !important;
+    justify-items: flex-end;
+  }
+  header .contact-hotline{
+    display: none !important;
+  }
+  
+}
+main{
+    grid-area: main;
+}
+
+footer{
+    grid-area: footer;
+}
+
+
+/* Grid Layout */
+.eleso-layout-row3-col1{
+    display: grid;
+    grid-template-areas: "a" "b" "c";
+}
+
+.eleso-layout-row3-col1 > :nth-child(1){
+    grid-area: a;
+}
+.eleso-layout-row3-col1 > :nth-child(2){
+    grid-area: b;
+}
+.eleso-layout-row3-col1 > :nth-child(3){
+    grid-area: c;
+}
+ /* Use a mobile-first approach to define the grid layout */
+ .eleso-grid-container {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols-xs), 1fr);
+    grid-gap: var(--grid-gap-xs);
+  }
+  
+  .eleso-grid-container-col-1{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: var(--grid-gap-xs);
+  }
+  /* Use media queries to adjust the grid layout for larger devices */
+  @media (min-width: 576px) {
+    .eleso-grid-container {
+      grid-template-columns: repeat(var(--grid-cols-sm), 1fr);
+      grid-gap: var(--grid-gap-sm);
+    }
+
+  }
+  
+  @media (min-width: 768px) {
+    .eleso-grid-container {
+      grid-template-columns: repeat(var(--grid-cols-md), 1fr);
+      grid-gap: var(--grid-gap-md);
+    }
+    .eleso-grid-container-col-1{
+      grid-template-columns: repeat(2,1fr);
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .eleso-grid-container {
+      grid-template-columns: repeat(var(--grid-cols-lg), 1fr);
+      grid-gap: var(--grid-gap-lg);
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .eleso-grid-container {
+      grid-template-columns: repeat(var(--grid-cols-xl), 1fr);
+      grid-gap: var(--grid-gap-xl);
+    }
+  }
+
+  @media (min-width: 576px) {
+    :root {
+        --font-size-small: 1rem; /* 16px / 16px */
+        --font-size-medium: 1.125rem; /* 18px / 16px */
+        --font-size-large: 1.25rem; /* 20px / 16px */
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        --font-size-small: 1.125rem; /* 18px / 16px */
+        --font-size-medium: 1.25rem; /* 20px / 16px */
+        --font-size-large: 1.375rem; /* 22px / 16px */
+    }
+}
+
+.eleso-grid{
+  display: grid;
+}
+  
+.eleso-display-none{
+  display: none;
+}
+
+  /* Display flex */
+  .eleso-flex{
+    display: flex;
+  }
+
+  .eleso-flex-column{
+    flex-direction: column;
+  }
+
+  .eleso-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items on mobile */
+}
+
+.eleso-flex-item {
+    flex: 1;
+    margin: var(--flex-gap);
+    max-width: calc(100% - var(--flex-gap) * 2); /* Full width on mobile */
+    box-sizing: border-box;
+}
+.eleso-flex-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eleso-hover-link-icon:hover .icon-arrow_right_alt {
+    margin-left: 10px; 
+    transition: transform 0.3s ease-in-out, margin-left 0.9s ease-in-out; 
+}
+   /*
+  * utility styles
+  */
+
+
+  /* Define some utility classes for styling the grid items */
+  .eleso-grid-item {
+    --border:2px solid transparent;
+    --text-align:center;
+
+    border: var(--border);
+    padding: var(--util-size-2);
+    text-align: var(--text-align);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    overflow: hidden; 
+}
+
+/* Hover effect */
+.eleso-grid-item:hover {
+    transform: scale(1.02); /* Slightly increase size on hover */
+}
+.eleso-box-shadow {
+  --box-shadow: var(--shadow-color-dark) 0px 1px 2px 0px, var(--shadow-color-light) 0px 2px 6px 2px;
+  box-shadow: var(--box-shadow);
+}
+
+.eleso-box-shadow:hover {
+  --box-shadow: var(--hover-shadow-color) 0px 25px 50px -12px;
+}
+
+/* Utility class styles for justify-content */
+.eleso-justify-content-space-between{
+    justify-content: space-between;
+}
+.eleso-justify-content-space-around{
+    justify-content: space-around;
+}
+
+.eleso-justify-content-start{
+ justify-content: flex-start;
+}
+.eleso-justify-content-end{
+    justify-content: flex-end;  
+}
+.eleso-justify-items-center
+{
+  justify-items: center;
+}
+.eleso-align-items-center {
+    align-items: center;
+  }
+  
+  .eleso-align-items-start {
+    align-items: flex-start;
+  }
+  
+  .eleso-align-items-end {
+    align-items: flex-end;
+  }
+
+  .eleso-bg-black {
+    background-color: black;
+  }
+  
+  .eleso-bg-white {
+    background-color: var(--theme-secondary);
+  }
+  
+  .eleso-bg-gray {
+    background-color: gray;
+  }
+  
+/* font styles */
+  .eleso-text-black {
+    color: var(--theme-dark);
+  }
+  
+  .eleso-text-white {
+    color: var(--theme-dark);
+  }
+  
+  .eleso-text-gray {
+    color: gray;
+  }
+  
+  .eleso-text-brand {
+    color: var(--theme-primary);
+  }
+  
+  .eleso-font-italic {
+    font-style: italic;
+  }
+  
+  .eleso-font-normal {
+    font-style: normal;
+  }
+  
+  .eleso-text-center {
+    --text-align:center;
+    text-align: var(--text-align);
+  }
+
+  .eleso-text-left {
+    --text-align: left;
+    text-align: var(--text-align);
+  }
+
+  .eleso-text-right {
+    --text-align:right;
+    text-align: var(--text-align);
+  }
+
+  .eleso-font-size-1 {
+    font-size: 1rem;
+  }
+  
+  .eleso-font-size-2 {
+    font-size: 1.25rem;
+  }
+  
+  .eleso-font-size-3 {
+    font-size: 1.5rem;
+  }
+  
+  .eleso-font-size-4 {
+    font-size: 1.75rem;
+  }
+  
+  /* Margin styles */
+
+  .eleso-m-1 {
+    margin:var(--util-size-1);
+  }
+  
+  .eleso-m-2 {
+    margin:var(--util-size-2);
+  }
+  
+  .eleso-m-3 {
+    margin:var(--util-size-3);
+  }
+  
+  .eleso-m-4 {
+    margin:var(--util-size-4);
+  }
+
+  .eleso-mt-1 {
+    margin-top:var(--util-size-1);
+  }
+  .eleso-mb-1 {
+    margin-bottom:var(--util-size-1);
+  }
+  .eleso-mtb-1 {
+    margin-top:var(--util-size-1);
+    margin-bottom:var(--util-size-1);
+  }
+  .eleso-m-inline-1 {
+    margin-inline:var(--util-size-1);
+  }
+
+  .eleso-mt-2 {
+    margin-top:var(--util-size-2);
+  }
+  .eleso-mb-2 {
+    margin-bottom:var(--util-size-2);
+  }
+  .eleso-mtb-2 {
+    margin-top:var(--util-size-2);
+    margin-bottom:var(--util-size-2);
+  }
+  .eleso-m-inline-2 {
+    margin-inline:var(--util-size-2);
+  }
+  
+  .eleso-mt-3 {
+    margin-top:var(--util-size-3);
+  }
+  .eleso-mb-3 {
+    margin-bottom:var(--util-size-3);
+  }
+  .eleso-mtb-3 {
+    margin-top:var(--util-size-3);
+    margin-bottom:var(--util-size-3);
+  }
+  .eleso-m-inline-3 {
+    margin-inline:var(--util-size-3);
+  }
+  
+  .eleso-mt-4 {
+    margin-top:var(--util-size-4);
+  }
+  .eleso-mb-4 {
+    margin-bottom:var(--util-size-4);
+  }
+  .eleso-mtb-4 {
+    margin-top:var(--util-size-4);
+    margin-bottom:var(--util-size-4);
+  }
+  .eleso-m-inline-4 {
+    margin-inline:var(--util-size-4);
+  }
+
+  .eleso-mr-1 {
+    margin-right:var(--util-size-1);
+  }
+  .eleso-mr-2 {
+    margin-right:var(--util-size-2);
+  }
+  .eleso-mr-3 {
+    margin-right:var(--util-size-3);
+  }
+  .eleso-mr-4 {
+    margin-right:var(--util-size-4);
+  }
+  .eleso-ml-1 {
+    margin-left:var(--util-size-1);
+  }
+  .eleso-ml-2 {
+    margin-left:var(--util-size-2);
+  }
+  .eleso-ml-3 {
+    margin-left:var(--util-size-3);
+  }
+  .eleso-ml-4 {
+    margin-left:var(--util-size-4);
+  }
+
+  /* Padding styles */
+  .eleso-p-1 {
+    padding:var(--util-size-1);
+  }
+  
+  .eleso-p-2 {
+    padding:var(--util-size-2);
+  }
+  
+  .eleso-p-3 {
+    padding:var(--util-size-3);
+  }
+  
+  .eleso-p-4 {
+    padding:var(--util-size-3);
+  }
+
+  .eleso-pt-1 {
+    padding-top:var(--util-size-1);
+  }
+  .eleso-pb-1 {
+    padding-bottom:var(--util-size-1);
+  }
+  .eleso-ptb-1 {
+    padding-top:var(--util-size-1);
+    padding-bottom:var(--util-size-1);
+  }
+  .eleso-p-inline-1 {
+    padding-inline:var(--util-size-1);
+  }
+
+  .eleso-pt-2 {
+    padding-top:var(--util-size-2);
+  }
+  .eleso-pb-2 {
+    padding-bottom:var(--util-size-2);
+  }
+  .eleso-ptb-2 {
+    padding-top:var(--util-size-2);
+    padding-bottom:var(--util-size-2);
+  }
+  .eleso-p-inline-2 {
+    padding-inline:var(--util-size-2);
+  }
+  
+  .eleso-pt-3 {
+    padding-top:var(--util-size-3);
+  }
+  .eleso-pb-3 {
+    padding-bottom:var(--util-size-3);
+  }
+  .eleso-ptb-3 {
+    padding-top:var(--util-size-3);
+    padding-bottom:var(--util-size-3);
+  }
+  .eleso-p-inline-3 {
+    padding-inline:var(--util-size-3);
+  }
+  
+  .eleso-pt-4 {
+    padding-top:var(--util-size-4);
+  }
+  .eleso-pb-4 {
+    padding-bottom:var(--util-size-4);
+  }
+  .eleso-ptb-4 {
+    padding-top:var(--util-size-4);
+    padding-bottom:var(--util-size-4);
+  }
+  .eleso-p-inline-4 {
+    padding-inline:var(--util-size-4);
+  }
+  
+  
+  /*  Border styles */
+
+  .eleso-border {
+    border: 1px solid var(--theme-primary);
+  }
+  .eleso-border-2 {
+    --border: 2px solid transparent;
+    border: var(--border);
+  }
+  .eleso-border-2:hover {
+    --border: 2px solid var(--theme-primary);
+  }
+  .eleso-border-none {
+    border: none;
+  }
+  
+  .eleso-br-1 {
+    border-radius: var(--util-size-1);
+  }
+  
+  .eleso-br-2 {
+    border-radius: var(--util-size-2);
+  }
+  
+  .eleso-br-3 {
+    border-radius: var(--util-size-3);
+  }
+  
+  .eleso-br-4 {
+    border-radius: var(--util-size-4);
+  }
+  
+
+  .eleso-position-absolute{
+    position: absolute;
+  }
+
+  .eleso-position-relative{
+    position: relative;
+  }
+  .eleso-position-fixed{
+    position: fixed;
+  }
+
+  .eleso-z-index-modal{
+    z-index:var(--z_index_modal);
+  }
+
+  .eleso-position-right-center{
+    top:45%;
+    right:1%;
+  }
+
+  /*
+ * component styles
+ */
+
+ /*
+  * Font system
+  */
+   
+  .eleso-font-small {
+    font-size: var(--font-size-small);
+}
+
+.eleso-font-medium {
+    font-size: var(--font-size-medium);
+}
+
+.eleso-font-large {
+    font-size: var(--font-size-large);
+}
+
+.eleso-font-light {
+    font-weight: var(--font-weight-light);
+}
+
+.eleso-font-regular {
+    font-weight: var(--font-weight-regular);
+}
+
+.eleso-font-bold {
+    font-weight: var(--font-weight-bold);
+}
+
+.letter-spacing-normal {
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+.letter-spacing-wide {
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.line-height-normal {
+    line-height: var(--line-height-normal);
+}
+
+.line-height-tight {
+    line-height: var(--line-height-tight);
+}
+
+.eleso-font-fancy {
+    --color: var(--theme-dark);
+    font-family: var(--font-fancy-family);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
+    color: var(--color);
+}
+
+.eleso-font-executive {
+    --color: var(--theme-dark-light);
+    font-family: var(--font-executive-family);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color);
+}
+
+.eleso-font-casual {
+    --color: var(--theme-dark-light);
+    font-family: var(--font-casual-family);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color);
+}
+
+.eleso-font-modern {
+    --color: var(--theme-dark-light);
+    font-family: var(--font-modern-family);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
+    color: var(--color);
+}
+
+.eleso-font-subtle {
+    --color: var(--theme-dark-light);
+    font-family: var(--font-subtle-family);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-light);
+    letter-spacing: var(--letter-spacing-normal);
+    line-height: var(--line-height-tight);
+    color: var(--color);
+}
+
+.eleso-font-highlight {
+    --color: var(--theme-dark-light);
+    font-family: 'Highlight Font', sans-serif; /* Define your highlight font family */
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-normal);
+    color: var(--color);
+}
+ 
+.eleso-font-gradient {
+  /* Set font size, family, etc. */
+  font-family: Arial, sans-serif; /* Adjust font family as needed */
+  font-weight: var(--font-weight-bold); /* Adjust font weight as needed */
+  /* Create gradient background */
+  background: linear-gradient(to left, 
+      var(--theme-primary),
+      yellowgreen,
+      var(--theme-accent-alt)
+  );
+  /* Clip the background to the text */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* Set the text color transparent to let the background gradient show through */
+  color: transparent;
+}
+
+.eleso-font-gradient-shine {
+  background: linear-gradient(
+      to right,
+      var(--theme-primary) 20%,
+      var(--theme-accent) 30%,
+      var(--theme-dark-light) 70%,
+      var(--theme-primary) 80%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: textShine 5s ease-in-out infinite alternate;
+}
+
+@keyframes textShine {
+  0% {
+      background-position: 0% 50%;
+  }
+  100% {
+      background-position: 100% 50%;
+  }
+}
+
+.eleso-typing-effect {
+    white-space: nowrap;
+    overflow: hidden;
+
+  }
+  
+  .eleso-typing-effect #cursor {
+    animation: blink 0.7s infinite;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .eleso-warm-line{
+    height:2px;
+    width:100%;
+    background-image: linear-gradient(to right, var(--pink), var(--yellow), var(--green-yellow),var(--yellow), var(--lightblue),var(--pink));
+  }
+
+  .eleso-bg-gradient{
+    --tw-gradient-to: #eff6ff !important;
+    --tw-gradient-from: #ede9fe !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+    background-image: linear-gradient(to top,var(--tw-gradient-stops))!important;
+  }
+
+
+  .eleso-border-round{
+    border-radius: 5px;
+  } 
+
+  /* Component 1: Simple Link */
+.eleso-link {
+    color: var(--theme-dark);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .eleso-link:hover {
+    color: var(--theme-primary);
+  }
+  
+  
+  /* Component 2: Button-like Link */
+  .eleso-btn-link {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--theme-dark-light);
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    border: 1px solid var(--theme-primary);
+  }
+  
+  .eleso-btn-link:hover {
+    background-color: var(--theme-primary);
+    color: #fff;
+  }
+  
+  /* Component 3: Animated Underline Link */
+  .eleso-animated-underline-link {
+    position: relative;
+    color: var(--theme-dark-light);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .eleso-animated-underline-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--theme-accent);
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .eleso-animated-underline-link:hover {
+    color: var(--theme-accent);
+  }
+  
+  .eleso-animated-underline-link:hover::after {
+    width: 100%;
+  }
+  /* Component 4: Animated Button-like Link */
+.eleso-btn-animated-link {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: var(--theme-accent);
+    color: var(--theme-dark);
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .eleso-btn-animated-link:hover {
+    background-color: var(--theme-primary);
+    transform: scale(1.1); /* Adjust the scale factor as needed */
+  }
+  
+  /* Component 5: Styled List */
+.eleso-styled-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+
+
+  @keyframes shake {
+    0%, 100% { transform: rotate(0deg) translateX(0); }
+    20%, 40%, 60%, 80% { transform: rotate(-10deg) translateX(-5px); }
+    10%, 30%, 50%, 70%, 90% { transform: rotate(10deg) translateX(5px); }
+  
+  }
+  
+  .eleso-shake-element {
+    animation: shake  1s ease-in-out infinite;
+  }
+  
+
+/* Video Element */
+.eleso-video-container {
+    position: relative;
+}
+  
+  .poster-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .eleso-video-dimensions  .poster-wrapper .eleso-poster {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 1000;
+    top: 0;
+    bottom: 0;
+    border-radius: 5px;
+  }
+  
+  .eleso-video-dimensions .eleso-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    display: block;
+    top: 0;
+    bottom: 0;
+    border-radius: 5px;
+  }
+
+  .eleso-video-dimensions {
+    width: 460px;
+    height: 267px;
+    border-radius: 5px;
+  }
+
+  @media (max-width:480px) {
+    .eleso-video-dimensions {
+      max-width: 460px;
+      min-width: 240px;
+      max-height: 267px;
+      min-height: 240px;
+      height: 80%;
+      width:90%;
+    }
+  }
+
+  .play-button-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.55);
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    z-index: 1005;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 20px;
+    border: 1px solid var(--theme-primary);
+}
+
+.play-button-overlay:hover{
+    background-color: var(--theme-primary);
+}
+
+  .play-button-overlay svg {
+    fill: var(--theme-primary);
+  }
+
+  .play-button-overlay:hover svg{
+    fill: var(--theme-dark)
+}
+
+
+/* Use a white background and a box shadow for the form */
+.eleso-form {
+    max-width: 600px;
+    margin: var(--util-size-3) auto;
+    padding: var(--util-size-4);
+    border-radius: 5px;
+  }
+  
+  /* Use a dark blue color and a large font size for the heading */
+  .eleso-heading {
+    color: var(--theme-primary);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Use a medium gray color and a small font size for the label */
+  .eleso-form label {
+    color: var(--theme-dark);
+  }
+  
+  /* Use a light gray border and a medium font size for the input and textarea */
+  .eleso-form :is(.eleso-input, .eleso-textarea) {
+    --pd: var(--util-size-3);
+    border: 1px solid var(--theme-secondary);
+    padding: var(--pd);
+    width: calc(100% - var(--pd) * 2);
+    margin: var(--util-size-2) 0;
+    background-color: var(--theme-secondary-light);
+    border-radius: 5px;
+    color: var(--theme-dark);
+  }
+  
+  /* Use a larger height and a resize handle for the textarea */
+  .eleso-textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  /* Use a dark blue background, a white color, and a medium font size for the button */
+  .eleso-button {
+    background-color: var(--theme-primary);
+    color: var(--theme-light);
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Use a lighter blue background for the button on hover */
+  .eleso-button:hover {
+    background-color: var(--theme-accent);
+  }
+
+
+  /* Select the image element */
+.eleso-app-layout .eleso-image {
+    width: 100%;
+    height: 100%;
+    max-height: 75%;
+    object-fit: cover;
+  }
+  
+  .eleso-app-layout .eleso-image-logo{
+    width: 50px;
+    height: 50px;
+  } 
+
+
+  .donation__method-img {
+    width: 104px; /* Adjust the width as needed */
+    height: auto; /* Adjust the height as needed */
+    margin-right: 8px;
+  }
+
+
+  .loader {
+    background-color: var(--theme-secondary-loader);
+    color: var(--theme-dark);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+  }

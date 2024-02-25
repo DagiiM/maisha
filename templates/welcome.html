@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <script type="module" src="{% static '/mvc/apps/home/app.js' %}"></script> 
+
+    <section class="home-page" >
+
+        <div class="eleso-grid-container-col-1 eleso-text-center eleso-align-center eleso-justify-items-center eleso-p-4">
+            <article class="eleso-video-container eleso-video-dimensions eleso-m-1">
+                <div class="poster-wrapper">
+                  <img src="" alt="Video Poster" class="eleso-poster" loading="lazy" />
+                  <div class="play-button-overlay">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="64px" height="64px">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                  </div>
+                </div>
+              
+                <video controls preload="none" id="eleso-video" class="eleso-video" playsinline>
+                  <source src="" type="video/mp4"  />
+                </video>
+              </article>
+                            
+
+            <div class="maisha-mission-section eleso-grid-item eleso-text-center">
+                <h1 class="eleso-font-executive eleso-typing-effect eleso-text-center eleso-mb-2 eleso-font-size-4">
+                    <span id="text">Maisha's Mision</span><span id="cursor">|</span>
+                </h1>
+                <p class="eleso-font-subtle eleso-m-2 eleso-p-inline-1"></p>
+            
+                <div class="eleso-grid-container-col-1 eleso-p-2 eleso-m-2">
+                    <article class="hero-section slider-images"></article>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="how-it-works-container eleso-p-4 eleso-theme-secondary-lighter"></div>
+
+        <div class="partner-section eleso-theme-secondary-light eleso-p-4">
+            <section class="maisha-partners-section">
+                <div class="maisha-partners-section__header">
+                <h3 class="eleso-font-fancy eleso-text-center eleso-mtb-3 eleso-font-gradient-shine">Corporate Partnerships</h3>
+                <div class="partner-section__about eleso-text-center eleso-font-subtle">
+                </div>
+            </div>
+            <div class="eleso-grid-container eleso-p-4">
+                <div class="eleso-grid-item eleso-m-3">
+                </div>
+            </div>
+                </section>
+
+        </div>
+
+        <div class="slider-section eleso-theme-secondary-lighter eleso-mtb-3"><div class="slider-quote"></div></div>
+        <!-- Slider -->
+        <div class="team-section eleso-ptb-2 eleso-theme-secondary-light" style="">
+            <div class="eleso-grid-container team-container eleso-p-4"></div>
+        </div>
+    </section>
+{% endblock %}

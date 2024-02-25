@@ -1,0 +1,31 @@
+{% extends "rest_framework/base.html" %}
+
+{% load static %}
+
+{% block maisha_style %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" disabled>
+  <link rel="stylesheet" href="{% static 'css/maisha.css' %}">
+{% endblock maisha_style %}
+
+{% block title %}
+Maisha API
+{% endblock %}
+
+{% block logo %}
+  <link rel="icon" href="{% static 'icons/favicon.svg' %}" type="image/x-icon"> 
+{% endblock %}
+
+{% block branding %}
+  <a class="navbar-brand" href="/">
+    <img class="logo" src="{% static 'icons/logo.svg' %}" alt="Maisha Girls Safe House" srcset="">
+    <p>Maisha API</p>
+  </a>
+{% endblock %}
+
+{% block footer %}
+  {% include 'includes/footer.html' %}
+{% endblock footer %}
+
+
+
+

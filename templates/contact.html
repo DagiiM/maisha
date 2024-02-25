@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <div class="eleso-container eleso-theme-secondary-light">
+
+            <section class="contact-container eleso-grid-container-col-1 eleso-align-items-center eleso-justify-items-center" style="padding-inline:4%">
+                  <div class="eleso-organization-contact eleso-p-4 eleso-font-subtle"></div>
+
+                  <form id="subscribe-form" class="eleso-form eleso-theme-secondary-lighter  eleso-box-shadow eleso-border-round" method="post" action="{% url 'subscribe' %}">
+                        <h1 class="eleso-font-casual eleso-text-brand eleso-mtb-2 eleso-text-center">Subscribe to Our Newsletter</h1>
+                        {% csrf_token %}
+                        </form>
+            </section>
+
+      </div>
+      <script type="module" src="{% static '/mvc/apps/contact/app.js' %}"></script> 
+{% endblock %}

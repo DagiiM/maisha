@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <script type="module" src="{% static '/mvc/apps/organization/app.js' %}"></script>
+    <div class="eleso-m-4 eleso-p-2">
+
+        <h1 class="eleso-text-center eleso-font-gradient-shine eleso-m-4 eleso-p-2">Thank you, {{ email }}!</h1>
+        <p class="eleso-text-center eleso-font-subtle">You're now subscribed to our newsletter.</p>
+
+    </div>
+
+
+{% endblock %}

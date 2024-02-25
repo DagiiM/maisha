@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <script type="module" src="{% static '/mvc/apps/program/app.js' %}"></script>  
+  
+
+<div class="eleso-ptb-2 eleso-theme-secondary-light">
+      <div id="program-intro" class="eleso-ptb-2">
+            <h1 class="eleso-font-executive eleso-typing-effect eleso-text-center eleso-mtb-2 eleso-font-size-4">
+                  <span id="text" class="eleso-font-gradient-shine">Our Programs</span><span id="cursor">|</span>
+                </h1>
+        <p class="eleso-font-subtle eleso-mb-4 eleso-p-inline-4 eleso-text-center">Program About Placeholder</p>
+      </div>
+
+      <section id="program-container" class="eleso-grid-container eleso-ptb-3 eleso-p-inline-4 eleso-p-1">
+      </section>
+</div>
+                         
+<div class="eleso-pb-2 eleso-theme-secondary-light">
+   <ul class="eleso-theme-secondary-lighter eleso-flex eleso-font-executive eleso-styled-list eleso-p-2">
+      <li class="eleso-p-3"><a href="" class="eleso-animated-underline-link">Program Activities</a></li>
+   </ul>
+    <section id="activities">
+    </section>
+</div>
+
+    {% endblock %}

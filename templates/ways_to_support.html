@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <script type="module" src="{% static '/mvc/apps/donate/app.js' %}"></script>
+    <div class="eleso-container">
+      <section class="contact-container eleso-grid-container-col-1 eleso-align-items-center eleso-justify-items-center" style="padding:1% 4%">
+            <div class="eleso-organization-contact eleso-grid-item" style="--text-align:left"></div>
+
+                  <section class="donate-section eleso-grid-item"  style="--text-align:left" id="donationSection">
+                        <!-- Progress Bar -->
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar" style="width: 0;"></div>
+                        </div>
+                
+                        <!-- Payment Methods Section -->
+                        <div class="donation__container" id="paymentMethodSection">
+                            <form class=" eleso-form" id="paymentMethodForm" action="#" method="post">
+                              <h2 class="donation__sub-title eleso-font-casual">How would you like to donate? </h2>
+                              <div class="donation-methods">
+                                  <label class="donation__method eleso-flex eleso-mtb-1">
+                                      <input type="radio" name="payment-method" id="paypal" class="eleso-mr-1" value="paypal" checked>
+                                      <img src="{% static 'icons/paypal.png' %}" alt="PayPal" class="donation__method-img eleso-ml-1" loading='lazy'>
+                                       <!--<span class="donation__method-text">PayPal</span>-->
+                                  </label>
+                                  
+                                  <label class="donation__method eleso-flex eleso-mtb-1">
+                                      <input type="radio" name="payment-method" id="mpesa" class="eleso-mr-1" value="mpesa">
+                                      <img src="{% static 'icons/mpesa.png' %}" alt="PayPal" class="donation__method-img eleso-ml-1" loading='lazy'>
+                                      <!--<span class="donation__method-text">Mpesa</span>-->
+                                  </label>
+                                  <label class="donation__method eleso-flex">
+                                      <input type="radio" name="payment-method" class="eleso-mr-1" value="other">
+                                  <p class='eleso-ml-1'>Other</p>
+                                  </label>
+                              </div>
+                                <button id="paymentMethodButton" class="eleso-button eleso-border-round eleso-mtb-2">Next <i class="icon-arrow_right"></i> </button>
+                            </form>
+                        </div>
+                
+                        <!-- Details Section -->
+                        <div class="donation__container" id="detailsSection" style="display: none;">
+                            <form class="donation__form eleso-form eleso-theme-secondary-lighter eleso-box-shadow eleso-border-round subscribe-form__fancy" id="detailsForm" action="#" method="post">
+                      
+                                    <div>
+                                         <h2 class="donation__sub-title eleso-font-casual eleso-text-brand eleso-mtb-2 eleso-text-center">Who is Giving Today?</h2>
+                                         <hr style="margin:10px;color:var(--theme-secondary-light)"/>
+                                         <p class="eleso-font-subtle eleso-mtb-2">We’ll never share this information with anyone.</p>
+                                    </div>
+                                    <label for="name">Name:</label>
+                                    <input class="donation__input eleso-input" type="text" id="name" name="name" placeholder="Name" required>
+                        
+                                    <label for="email">Email:</label>
+                                    <input class="donation__input eleso-input" type="email" id="email" name="email" placeholder="Email" required>
+                                    
+                                    <label for="message">Message (optional):</label>
+                                    <textarea class="donation__textarea eleso-textarea" id="message" name="message" placeholder="Message" rows="4"></textarea>
+                                  <div class="button-flex">
+                                    <button id="previousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button> <!-- Add Previous button -->
+                                    <button id="detailsButton" class="eleso-button eleso-border-round eleso-mtb-2">Next <i class="icon-arrow_right"></i> </button>
+                                  </div>   
+
+                              </form>
+                        </div>
+                
+                        <!-- Specific Payment Method Pages -->
+                        <div class="donation__container" id="paypalMethodSection" style="display: none;">
+                            <!-- PayPal Payment Method Page -->
+                            <h2 class="eleso-font-casual">Pay with PayPal</h2>
+                            <p class="eleso-font-subtle eleso-mtb-2">Please complete your PayPal payment to support our cause.</p>
+                            <!-- Include PayPal integration here or any specific payment method content -->
+                            <div  class="button-flex">
+                              <button id="paypalPreviousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button> <!-- Add Previous button -->
+                              
+                              <button id="paypalSubmitButton" class="eleso-button eleso-border-round eleso-mtb-2"><a href="https://www.sandbox.paypal.com/donate/?hosted_button_id=AVSBCSJX9B8WS">Donate Now</a></button>
+                            </div>
+                        </div>
+                
+                        <div class="donation__container" id="mpesaMethodSection" style="display: none;">
+                                <form class="eleso-form eleso-theme-secondary-lighter eleso-box-shadow eleso-border-round subscribe-form__fancy">
+                                        <!-- Mpesa Payment Method Page -->
+                                        <h2 class="eleso-font-casual">Lipa na Mpesa</h2>
+                                        <p class="eleso-font-subtle eleso-mtb-2">Please complete your Mpesa payment to support our cause.</p>
+                                        <label class="donation__label" for="mobile">Mobile Number:</label>
+                                        <input type="tel" class="donation__input  eleso-input" id="mobile" name="mobile"  placeholder="Mobile Number" required>
+                                
+                                        <label class="donation__label" for="amount">Amount:</label>
+                                        <input type="number" class="donation__input  eleso-input" id="amount" name="amount"  placeholder="Amount" required>
+                                        <!-- Include Mpesa payment integration here or any specific payment method content -->
+                                    <div class="button-flex">
+                                        <button id="mpesaPreviousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button> <!-- Add Previous button -->
+                                        <button id="mpesaSubmitButton" class="eleso-button eleso-border-round eleso-mtb-2">Submit</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </section>
+      </section>
+
+</div>
+
+
+    <script>
+        // Get references to the sections and buttons
+        const paymentMethodSection = document.getElementById("paymentMethodSection");
+        const detailsSection = document.getElementById("detailsSection");
+        const paypalMethodSection = document.getElementById("paypalMethodSection");
+        const mpesaMethodSection = document.getElementById("mpesaMethodSection");
+        const paymentMethodButton = document.getElementById("paymentMethodButton");
+        const detailsButton = document.getElementById("detailsButton");
+        const previousButton = document.getElementById("previousButton");
+        const paypalSubmitButton = document.getElementById("paypalSubmitButton");
+        const mpesaSubmitButton = document.getElementById("mpesaSubmitButton");
+        const paypalPreviousButton = document.getElementById("paypalPreviousButton");
+        const mpesaPreviousButton = document.getElementById("mpesaPreviousButton");
+        const progressBar = document.getElementById("progressBar");
+
+        // Add an event listener to the Payment Method form
+        document.getElementById("paymentMethodForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            paymentMethodSection.style.display = "none";
+            detailsSection.style.display = "block";
+            progressBar.style.width = "33%";
+        });
+
+        // Add an event listener to the Details form
+        detailsButton.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            detailsSection.style.display = "none";
+            const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+            if (selectedPaymentMethod === "paypal") {
+                paypalMethodSection.style.display = "block";
+                progressBar.style.width = "66%";
+            } else if (selectedPaymentMethod === "mpesa") {
+                mpesaMethodSection.style.display = "block";
+                progressBar.style.width = "66%";
+            }
+        });
+
+        // Add event listeners for Previous buttons
+        previousButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            detailsSection.style.display = "none";
+            paymentMethodSection.style.display = "block";
+            progressBar.style.width = "0";
+        });
+
+        paypalPreviousButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            paypalMethodSection.style.display = "none";
+            detailsSection.style.display = "block";
+            progressBar.style.width = "33%";
+        });
+
+        mpesaPreviousButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            mpesaMethodSection.style.display = "none";
+            detailsSection.style.display = "block";
+            progressBar.style.width = "33%";
+        });
+
+        // Add event listeners for PayPal and Mpesa submit buttons
+        paypalSubmitButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            // Handle the final PayPal form submission or other actions
+            // This is where you would submit the form or display a thank you message.
+            alert("Paypal Form submitted! You can customize this action.");
+        });
+
+        mpesaSubmitButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            // Handle the final Mpesa form submission or other actions
+            // This is where you would submit the form or display a thank you message.
+            alert("Mpesa Form submitted! You can customize this action.");
+        });
+    </script>
+{% endblock %}

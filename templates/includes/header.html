@@ -1,0 +1,161 @@
+{% load static %}
+
+<header class="eleso-fle eleso-align-items-center eleso-justify-content-space-between eleso-font-subtle">
+    <section class="eleso-flex eleso-align-items-center eleso-justify-content-space-between eleso-theme-secondary-lighter">
+
+        <nav class="nav-left eleso-flex eleso-align-items-center eleso-justify-space-between" style="max-width:100%;min-width:50%">
+            <div class="nav-left-logo eleso-flex eleso-align-items-center eleso-typing-effect">
+                <a href="{% url 'welcome' %}"><img class="eleso-image-logo" src="{% static 'icons/logo.svg' %}" loading="lazy" alt="Maisha Girls Safe House" srcset=""></a>
+                <span id="text" class="eleso-font-gradient eleso-font-size-2">Maisha Girls Safe House</span><span id="cursor">|</span>
+             </div>
+            <nav class="nav-right eleso-flex eleso-m-inline-4">
+                <i class="icon-cancel eleso-ml-1 eleso-font-size-4 eleso-text-brand"></i>
+                <i class="icon-menu eleso-ml-1 eleso-font-size-4 eleso-text-brand"></i>
+            </nav>
+        </nav>
+
+
+        <nav class="contact-hotline eleso-flex eleso-justify-content-space-between eleso-p-2 eleso-align-items-center">
+            <div class="eleso-grid eleso-justify-items-start">
+                <div class="eleso-flex">
+                    <i class="icon-phone eleso-font-size-2 eleso-m-3 eleso-text-brand eleso-shake-element"></i>
+                
+                    <span class="eleso-grid-container-col-1 eleso-p-1 eleso-align-items-center eleso-justify-items-start">
+                        <div class="eleso-flex eleso-flex-column">
+                            <span class="eleso-font-regular eleso-font-gradient">Call Us:</span>  
+                            <span class="eleso-flex mobile_number"></span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <span class="eleso-m-inline-4">|</span>
+            <div class="eleso-flex eleso-flex-column eleso-justify-content-space-between">
+                <div class="eleso-flex">
+                    <i class="icon-mail_outline eleso-font-size-3 eleso-m-2 eleso-text-brand"></i>
+
+                    <span class="eleso-grid-container-col-1 eleso-p-1 eleso-align-items-center eleso-justify-items-start">
+                        <div class="eleso-flex eleso-flex-column">
+                            <span class="eleso-font-regular eleso-font-gradient">Mail Us:</span>  
+                            <span class="email"></span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+        </nav>
+
+    </section>
+
+        <section class="eleso-flex eleso-m-2 eleso-align-items-center eleso-justify-content-space-between eleso-styled-list eleso-p-inline-4">
+            <nav class="nav-middle eleso-font-regular">
+                <ul class="eleso-flex eleso-align-items-center eleso-styled-list">
+                    <li><a href="{% url 'about' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">About</a> </li>
+                    <li><a href="{% url 'program' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Programs</a></li>
+                    <li><a href="{% url 'program' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Services</a></li>
+                    <li><a href="{% url 'why_maisha' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Why Us?</a></li>
+                    <li><a href="{% url 'contact' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Contact</a></li>
+                    <li class=""><a href="{% url 'ways_to_support' %}"  class="eleso-btn-link eleso-m-inline-2 eleso-p-inline-1">Donate</a></li>
+                    <!--<li><a href="{% url 'blog' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Blog</a></li>-->
+            
+                </ul>
+            </nav>
+
+
+      </section>
+</header>
+
+
+<mobile class="eleso-mobile-nav eleso-grid eleso-justify-items-start eleso-p-4 eleso-theme-secondary-lighter eleso-font-subtle">
+    <section class="eleso-flex eleso-flex-column">
+
+        <nav class="nav-left eleso-grid eleso-align-center eleso-justify-items-center">
+            <img class="eleso-image-logo" src="{% static 'icons/logo.svg' %}" loading="lazy" alt="Maisha Girls Safe House" srcset="" style="width:80px;height:80px">
+        </nav>
+
+        
+    </section>
+
+    <section class="eleso-flex eleso-flex-column eleso-styled-list">
+        <nav class="nav-middle">
+            <ul class="eleso-grid eleso-justify-items-start eleso-styled-list">
+                <li class="eleso-p-3 " style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'about' %}"  class="eleso-link">About</a> </li>
+                <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'program' %}"  class="eleso-link">Programs</a></li>
+                <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'program' %}"  class="eleso-link">Services</a></li>
+                <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'why_maisha' %}"  class="eleso-link">Why Us?</a></li>
+                <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'contact' %}"  class="eleso-link">Contact</a></li>
+                <!--<li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'blog' %}"  class="eleso-link">Blog</a></li>-->
+        
+            </ul>
+        </nav>
+
+    </section>
+
+        <section class="eleso-flex eleso-flex-column eleso-mtb-4">
+
+            <nav class="contact-hotline eleso-grid eleso-justify-content-space-between">
+                <div class="eleso-grid eleso-justify-items-start">
+                    <div class="eleso-flex">
+                        <i class="icon-phone eleso-font-size-2 eleso-m-3 eleso-text-brand"></i>
+                    
+                        <span class="eleso-grid-container-col-1 eleso-p-1 eleso-align-items-center eleso-justify-items-start">
+                            <div class="eleso-flex eleso-flex-column">
+                                <span class="eleso-font-bold">Contact Us:</span>  
+                                <span class="mobile-mobile_phone"></span>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="eleso-flex eleso-flex-column eleso-justify-content-space-between">
+                    <div class="eleso-flex">
+                        <i class="icon-mail_outline eleso-font-size-3 eleso-m-2 eleso-text-brand"></i>
+    
+                        <span class="eleso-grid-container-col-1 eleso-p-1 eleso-align-items-center eleso-justify-items-start">
+                            <div class="eleso-flex eleso-flex-column">
+                                <span class="eleso-font-bold">Mail Us:</span>  
+                                <span class="mobile-email"></span>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+
+            </nav>
+        </section>
+
+        <section class="eleso-flex eleso-flex-column eleso-styled-list">
+            <nav class="nav-middle eleso-grid eleso-align-center">
+                <ul class="eleso-grid eleso-justify-items-start eleso-styled-list">
+                <li class="eleso-p-2 eleso-m-1" ><a href="{% url 'ways_to_support' %}"  class="eleso-btn-link">Donate</a></li>
+
+                </ul>
+            </nav>
+    
+        </section>
+
+</mobile>
+
+<!--
+    <header style="display:noe">
+    <nav class="nav-left">
+        <img class="logo" src="{% static 'icons/logo.svg' %}" alt="Maisha Girls Safe House" srcset="">
+        <div class="logo-text">Maisha Girls Safe House</div>
+    </nav>
+    <nav class="nav-middle">
+        <ul>
+            <li><a href="{% url 'about' %}">About</a> </li>
+            <li><a href="{% url 'program' %}">Programs</a></li>
+            <li><a href="{% url 'program' %}">Services</a></li>
+            <li><a href="{% url 'why_maisha' %}">Why Us?</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li ><a href="{% url 'ways_to_support' %}" style="background-color: var(--brand-color-alt);color:var(--brand-light); padding: 0.4rem 2rem;">Donate</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="https://www.sandbox.paypal.com/donate/?hosted_button_id=AVSBCSJX9B8WS">Donate</a></li>
+       
+    </ul>
+</nav>
+<nav class="nav-right">
+    <i class="icon-cancel"></i>
+    <i class="icon-menu"></i>
+</nav>
+</header>
+-->
