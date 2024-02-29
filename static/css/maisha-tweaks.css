@@ -1,0 +1,66 @@
+@media (max-width:767px){
+    .nav-left{
+        width:100%;
+    }
+    .nav-left .nav-left-logo{
+        width: 85%;
+    }
+    .nav-left .nav-right{
+        width: 15%;
+    }
+}
+
+@media (min-width:768px){
+    .contact-hotline{
+        width:50%;
+    }
+    .nav-left{
+        width:50%;
+    }
+}
+
+.example-element {
+    /* Set other styles as needed */
+	background: linear-gradient(-45deg,var(--theme-primary), var(--theme-accent), var(--theme-accent-alt), #23a6d5, #23d5ab);
+	background-size: 500% 500%;
+    color: var(--theme-light);
+	animation: gradientAnimation 15s ease infinite;
+  }
+  
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 100%;
+    }
+    50% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: 0% 100%;
+    }
+  }
+  
+  
+
+.hero-section.slider-images .carousel-container{
+  width: 320px;
+  height: 180px;
+}
+
+.hero-section.slider-images .carousel-container .carousel-image img{
+  object-fit: cover;
+}
+
+.hero-section.slider-images .carousel-container .dot-container {
+  --size: 5px;
+}
+
+footer {
+  font-size: 0.8rem !important;
+}
+
+.eleso-thumbnail-img{
+  width: 100%;
+  max-width: 250px !important;
+  height: 250px !important;
+  object-fit: cover;
+}

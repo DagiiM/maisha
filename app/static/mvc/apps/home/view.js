@@ -66,7 +66,7 @@ class HomeView extends View{
           // Create a div for each team member
           const teamMemberDiv = document.createElement('div');
           teamMemberDiv.classList.add('eleso-grid-item','box-shadow', 'eleso-border-round', 'eleso-border-2', 'eleso-mb-2', 'eleso-bg-white', 'eleso-hover-link-icon');
-
+          teamMemberDiv.style='display:flex;flex-direction:column';
           const teamMemberDescDiv = document.createElement('div');
           teamMemberDescDiv.classList.add('eleso-p-2');
 

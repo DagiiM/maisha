@@ -18,7 +18,7 @@ def create_image_versions(sender, instance: 'Image', created: bool, **kwargs) ->
     """
     if created and instance.file:
         # Define aspect ratio
-        aspect_ratio = 3 / 4  # for a 3:4 aspect ratio
+        aspect_ratio = 3 / 3  # for a 3:4 aspect ratio
 
         # Define versions with adjusted heights based on the aspect ratio
         versions = {

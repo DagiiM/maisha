@@ -49,9 +49,6 @@ INSTALLED_APPS = [
 ]
 
 # Configure SSL settings
-SSL_ENABLED = False
-SSL_CERTIFICATE = 'localhost.crt'
-SSL_KEY = 'localhost.key'
 
 MPESA_CONFIG = {
     'CONSUMER_KEY': 'yIqAbNZV3tOaGFz22IqwLSkcCDyzNAZa',
@@ -82,7 +79,7 @@ ROOT_URLCONF = 'maisha.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
