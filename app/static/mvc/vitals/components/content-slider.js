@@ -1,224 +1,236 @@
+import { Component } from './component.js';
 
+class ContentSlider extends Component {
+  constructor(container, data, options = {}) {
+    super();
 
-class ContentSlider {
-    constructor(slider, data, options = {}) {
-      this.slider = slider.querySelector('.eleso-content-slider');
-      this.data = data;
-      this.custom_offset = options.customOffset || 0;
-      this.slides = Array.from(this.slider.getElementsByClassName("eleso-slide"));
-      this.slideIndex = options.initialSlide || 0;
-      this.slideInterval = null;
-      this.isDragging = false;
-      this.startDragX = null;
-      this.currentTranslate = 0;
-      this.slideWidth = 0;
-      this.paginationDots = []; // Initialize as an empty array
-      this.options = {
-        autoSlide: options.autoSlide || false,
-        autoSlideDelay: options.autoSlideDelay || 3000,
-        transitionDuration: options.transitionDuration || 500,
-        loop: options.loop || false,
-        navigation: options.navigation || true,
-        pagination: options.pagination || false,
-        touchSwipe: options.touchSwipe || true,
-        responsive: options.responsive || false,
-        ...options,
-      };
-  
-      if (this.options.pagination) {
-        this.createPagination();
-      }
-  
-      this.initSlider();
-      this.addEventListeners();
-      if (this.options.autoSlide) {
-        this.startSlideshow();
-      }
-      if (this.options.responsive) {
-        this.makeResponsive();
-      }
+    // Ensure container is a DOM element
+    if (!(container instanceof HTMLElement)) {
+      throw new Error(`Container must be a DOM element`);
     }
 
-    initSlider() {
-      this.slider.setAttribute("role", "region");
-      this.slides.forEach((slide) => {
-        slide.setAttribute("role", "group");
-        slide.setAttribute("aria-live", "polite");
-      });
-      
-      this.updateSlideWidth();
-      // Set initial position between 5% and 95% of slider width
-      this.currentTranslate = -this.slideWidth * (this.options.initialSlide + 0.5);
-      this.applySlideTransition();
-      this.showSlides(this.slideIndex);
-
-      this.showSlides(this.slideIndex);
-      if (this.options.pagination) {
-        let pagination = document.querySelector('.eleso-slider-pagination');
-        if( !pagination){
-          this.createPagination();
-        }
-      }
-    }
-
-    updateSlideWidth() {
-      const slideRect = this.slides[0].getBoundingClientRect();
-      const slideMargin = (slideRect.width - this.slides[0].offsetWidth) / 2; // Total margin on both sides
-      this.slideWidth = slideRect.width + slideMargin + this.custom_offset;
-    }
-    
-    
-
-    showSlides(n) {
-      const sliderWidth = this.slider.offsetWidth;
-      const maxVisibleSlides = Math.floor(sliderWidth / this.slideWidth);
-      this.slideIndex = ((n % this.slides.length) + this.slides.length) % this.slides.length; // Handle loop
-
-      const newTranslate = -(this.slideIndex * this.slideWidth);
-      this.currentTranslate = newTranslate;
-
-      this.applySlideTransition();
-      if (this.options.pagination) {
-        this.updatePagination();
-      }
-    }
-
-
-    applySlideTransition() {
-      this.slides.forEach((slide, index) => {
-        slide.style.transition = `transform ${this.options.transitionDuration}ms ease-in-out`;
-        const positionX = this.currentTranslate //+ (index * this.slideWidth);
-        slide.style.transform = `translateX(${positionX}px)`;
-      });
-    }
-    
-
-    
-
-    plusSlides(n) {
-      this.showSlides(this.slideIndex + n);
-    }
-
-    startSlideshow() {
-      this.slideInterval = setInterval(() => {
-        if (this.slideIndex === this.slides.length - 1) {
-          // If last slide is reached, reset to first slide
-          this.slideIndex = 0;
-          this.currentTranslate = 0;
-        } else {
-          this.plusSlides(1);
-        }
-      }, this.options.autoSlideDelay);
-    }
-
-
-    resetSlideshow() {
-      clearInterval(this.slideInterval);
-      if (this.options.autoSlide) {
-        this.startSlideshow();
-      }
-    }
-
-    handleDragStart = (e) => {
-      this.isDragging = true;
-      this.dragStartX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
-      this.slides.forEach((slide) => {
-        slide.style.transition = "none";
-      });
+    // Initialize properties
+    this.container = container;
+    this.container.classList.add('eleso-slider');
+    this.data = data;
+    this.options = {
+      autoSlide: options.autoSlide !== undefined ? options.autoSlide : false,
+      autoSlideDelay: options.autoSlideDelay || 9000,
+      transitionDuration: options.transitionDuration || 500,
+      loop: options.loop !== undefined ? options.loop : false,
+      navigation: options.navigation !== undefined ? options.navigation : false,
+      pagination: options.pagination || true,
+      touchSwipe: options.touchSwipe !== undefined ? options.touchSwipe : true,
+      responsive: options.responsive || false,
     };
+    this.slideIndex = options.initialSlide || 0;
+    this.slideInterval = null;
+    this.isDragging = false;
+    this.dragStartX = null;
+    this.dragStartY = null;
+    this.currentTranslate = 0;
+    this.slideWidth = 0;
+    this.slides = [];
+    this.paginationDots = [];
+    
+    this.init();
+  }
 
-    handleDragEnd = () => {
-      if (!this.isDragging) return;
-      this.isDragging = false;
-      const movedBy = this.dragEndX - this.dragStartX;
-      if (Math.abs(movedBy) > this.slideWidth / 4) { // threshold to decide if slide should change
-        this.plusSlides(movedBy > 0 ? -1 : 1);
-      } else {
-        this.plusSlides(0); // Stay on the current slide
-      }
-      this.resetSlideshow();
-    };
-
-    handleDrag = (e) => {
-      if (!this.isDragging) return;
-      e.preventDefault();
-      const currentX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-      const diffX = currentX - this.dragStartX;
-      this.dragEndX = currentX;
-      const translateX = this.currentTranslate + diffX;
-      this.slides.forEach((slide, index) => {
-        //slide.style.transform = `translateX(${translateX + (index * this.slideWidth)}px)`;
-      });
-    };
-
-    handleKeydown = (e) => {
-      if (e.key === "ArrowLeft") {
-        this.plusSlides(-1);
-      } else if (e.key === "ArrowRight") {
-        this.plusSlides(1);
-      }
-    };
-
-
-    addEventListeners() {
-      // Simplified for brevity. Add touch and keydown events similarly.
-      this.slider.addEventListener("mousedown", this.handleDragStart);
-      this.slider.addEventListener("mouseup", this.handleDragEnd);
-      this.slider.addEventListener("mousemove", this.handleDrag);
-      this.slider.addEventListener("mouseleave", this.handleDragEnd);
-      this.slider.addEventListener("touchstart", this.handleDragStart);
-      this.slider.addEventListener("touchend", this.handleDragEnd);
-      this.slider.addEventListener("touchmove", this.handleDrag);
-      this.slider.addEventListener("keydown", this.handleKeydown);
-      window.addEventListener("resize", () => {
-        this.updateSlideWidth();
-        this.showSlides(this.slideIndex);
-      });
+  init() {
+    // Ensure slider exists within the container
+    this.slider = this.container.querySelector('.eleso-content-slider');
+    if (!this.slider) {
+      throw new Error("Slider element not found within container");
     }
 
-    updatePagination() {
-      if (!this.options.pagination || this.paginationDots.length === 0) {
-        return;
-      }
-  
-      this.paginationDots.forEach((dot, index) => {
-        if (index === this.slideIndex) {
-          dot.classList.add("active");
-        } else {
-          dot.classList.remove("active");
-        }
-      });
-    }
-  
-    createPagination() {
-      const paginationContainer = document.createElement("div");
-      paginationContainer.className = "eleso-slider-pagination";
-      this.slider.parentNode.insertBefore(paginationContainer, this.slider.nextSibling);
-  
-      this.slides.forEach((_, index) => {
-        const paginationDot = document.createElement("span");
-        paginationDot.className = "eleso-pagination-dot";
-        paginationDot.addEventListener("click", () => this.showSlides(index));
-        paginationContainer.appendChild(paginationDot);
-      });
-  
-      this.paginationDots = Array.from(paginationContainer.children);
-      this.updatePagination();
+    // Ensure there are slides in the slider
+    this.slides = Array.from(this.slider.querySelectorAll('.eleso-slide'));
+    if (this.slides.length === 0) {
+      throw new Error("No slides found in the slider");
     }
 
+    // Get the width of the slides
+    this.slideWidth = this.slides[0].offsetWidth;
 
-  makeResponsive() {
-    const sliderWidth = this.slider.offsetWidth;
-    const maxVisibleSlides = Math.floor(sliderWidth / this.slideWidth);
-    this.slideWidth = sliderWidth / maxVisibleSlides; // Adjust slide width based on visible slides
-    this.slides.forEach(slide => {
-      slide.style.width = `${this.slideWidth}px`; // Apply adjusted width to each slide
+    // Create pagination if needed
+    if (this.options.pagination) {
+      this.createPagination();
+    }
+
+    // Create navigation if needed
+    if (this.options.navigation) {
+      this.createNavigation();
+    }
+
+    // Add event listeners
+    this.addEventListeners();
+
+    // Start slideshow if autoSlide is enabled
+    if (this.options.autoSlide) {
+      this.startSlideshow();
+    }
+
+    // Show the initial slide
+    this.showSlide(this.slideIndex);
+  }
+
+  createPagination() {
+    const paginationContainer = this.createElement('div', 'eleso-slider-pagination');
+    this.slider.parentNode.insertBefore(paginationContainer, this.slider.nextSibling);
+
+    this.slides.forEach((_, index) => {
+      const paginationDot = this.createElement('span', 'eleso-pagination-dot');
+      paginationDot.addEventListener('click', () => this.showSlide(index));
+      paginationContainer.appendChild(paginationDot);
     });
-    this.showSlides(this.slideIndex);
+
+    this.paginationDots = Array.from(paginationContainer.children);
+    this.updatePagination();
   }
 
-  
+  createNavigation() {
+    const prevButton = this.createElement('button', 'eleso-slider-prev', {}, 'Prev');
+    prevButton.addEventListener('click', () => this.plusSlides(-1));
+    const nextButton = this.createElement('button', 'eleso-slider-next', {}, 'Next');
+    nextButton.addEventListener('click', () => this.plusSlides(1));
 
+    this.container.appendChild(prevButton);
+    this.container.appendChild(nextButton);
   }
 
-  export { ContentSlider };
+  addEventListeners() {
+    this.slider.addEventListener('mousedown', this.handleDragStart);
+    this.slider.addEventListener('mouseup', this.handleDragEnd);
+    this.slider.addEventListener('mouseleave', this.handleDragEnd);
+    this.slider.addEventListener('mousemove', this.handleDrag);
+
+    this.slider.addEventListener('touchstart', this.handleTouchStart, { passive: true });
+    this.slider.addEventListener('touchmove', this.handleTouchMove, { passive: false });
+    this.slider.addEventListener('touchend', this.handleTouchEnd);
+    this.slider.addEventListener('touchcancel', this.handleTouchEnd);
+
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  handleTouchStart = (e) => {
+    if (e.touches.length > 1) return; // Ignore multi-touch gestures
+    this.isDragging = true;
+    this.dragStartX = e.touches[0].clientX;
+    this.dragStartY = e.touches[0].clientY; // Added Y position
+    this.currentTranslate = this.slideIndex * -this.slideWidth;
+  };
+
+  handleTouchMove = (e) => {
+    if (!this.isDragging) return;
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY; // Added Y position
+    const diffX = currentX - this.dragStartX;
+    const diffY = currentY - this.dragStartY; // Added Y difference
+
+    // Check if vertical scrolling
+    if (Math.abs(diffY) > Math.abs(diffX)) {
+      this.isDragging = false;
+      return;
+    }
+
+    e.preventDefault(); // Prevent scrolling
+    this.currentTranslate += diffX;
+    this.updateSlidePositions();
+  };
+
+  handleTouchEnd = () => {
+    if (!this.isDragging) return;
+    this.isDragging = false;
+    const movedBy = this.currentTranslate / this.slideWidth;
+
+    if (Math.abs(movedBy) > 0.5) {
+      this.plusSlides(movedBy > 0 ? -1 : 1);
+    } else {
+      this.showSlide(this.slideIndex);
+    }
+
+    this.resetSlideshow();
+  };
+
+  handleDragStart = (e) => {
+    this.isDragging = true;
+    this.dragStartX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    e.preventDefault();
+  };
+
+  handleDrag = (e) => {
+    if (!this.isDragging) return;
+    const currentX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+    const diffX = currentX - this.dragStartX;
+    this.currentTranslate = this.slideIndex * -this.slideWidth + diffX;
+    this.updateSlidePositions();
+  };
+
+  handleDragEnd = () => {
+    if (!this.isDragging) return;
+    this.isDragging = false;
+    const movedBy = this.currentTranslate / this.slideWidth;
+
+    if (Math.abs(movedBy) > 0.5) {
+      this.plusSlides(movedBy > 0 ? -1 : 1);
+    } else {
+      this.showSlide(this.slideIndex);
+    }
+
+    this.resetSlideshow();
+  };
+
+  handleResize = () => {
+    this.slideWidth = this.slides[0].offsetWidth;
+    this.showSlide(this.slideIndex);
+  };
+
+  updateSlidePositions() {
+    this.slides.forEach((slide, index) => {
+      slide.style.transform = `translateX(${this.currentTranslate + index * this.slideWidth}px)`;
+    });
+  }
+
+  startSlideshow() {
+    this.slideInterval = setInterval(() => {
+      this.plusSlides(1);
+    }, this.options.autoSlideDelay);
+  }
+
+  resetSlideshow() {
+    clearInterval(this.slideInterval);
+    if (this.options.autoSlide) {
+      this.startSlideshow();
+    }
+  }
+
+  plusSlides(n) {
+    let newIndex = (this.slideIndex + n) % this.slides.length;
+    if (newIndex < 0) {
+      newIndex = this.slides.length + newIndex;
+    }
+    this.showSlide(newIndex);
+  }
+
+  showSlide(index) {
+    this.slideIndex = index;
+    this.currentTranslate = -this.slideIndex * this.slideWidth;
+    this.updateSlidePositions();
+    this.slider.style.transition = `transform ${this.options.transitionDuration}ms ease-in-out`;
+    this.slides.forEach((slide, i) => {
+      slide.style.transform = `translateX(${this.currentTranslate}px)`;
+    });
+    this.updatePagination();
+    this.resetSlideshow();
+  }
+
+  updatePagination() {
+    if (!this.options.pagination) return;
+    this.paginationDots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === this.slideIndex);
+    });
+  }
+}
+
+export { ContentSlider };

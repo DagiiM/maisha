@@ -50,7 +50,7 @@ import getImageUrl from '../../vitals/utils/image_version.js';
                     content.innerHTML = `
                         <h1 class="eleso-corporate-carousel-title">${''}</h1>
                         <p class="eleso-corporate-carousel-subtitle">${result.caption || ''}</p>
-                        <a href="#" class="eleso-corporate-carousel-button">Learn More</a>
+                       <!--  <a href="#" class="eleso-corporate-carousel-button">Learn More</a> -->
                     `;
                     slide.appendChild(content);
         

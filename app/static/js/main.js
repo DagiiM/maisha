@@ -40,6 +40,83 @@ document.addEventListener('DOMContentLoaded', () => {
     typingEffect.startTyping();
   }
 
+let contentCard =document.querySelectorAll('eleso-content-card')
+if (contentCard){
+  contentCard.forEach(card => {
+    const body = card.querySelector('.eleso-content-card__body');
+    const showMoreBtn = card.querySelector('.eleso-content-card__show-more');
+    const showLessBtn = card.querySelector('.eleso-content-card__show-less');
+  
+    showMoreBtn.addEventListener('click', () => {
+      body.classList.remove('eleso-content-card__body--truncated');
+      showMoreBtn.style.display = 'none';
+      showLessBtn.style.display = 'inline';
+    });
+  
+    showLessBtn.addEventListener('click', () => {
+      body.classList.add('eleso-content-card__body--truncated');
+      showMoreBtn.style.display = 'inline';
+      showLessBtn.style.display = 'none';
+    });
+  
+    if (body.scrollHeight > body.offsetHeight) {
+      body.classList.add('eleso-content-card__body--truncated');
+      showMoreBtn.style.display = 'inline';
+    } else {
+      showMoreBtn.style.display = 'none';
+      showLessBtn.style.display = 'none';
+    }
+  });
+}
+
+const showMoreBtn = document.querySelector('.eleso-hero-section__button');
+    const heroDescription = document.querySelector('.eleso-hero-section__description');
+
+    function toggleShowMore() {
+      heroDescription.classList.toggle('eleso-hero-section__description--show-more');
+      showMoreBtn.textContent = heroDescription.classList.contains('eleso-hero-section__description--show-more') ? 'Show Less' : 'Show More';
+    }
+
+    function checkDescriptionHeight() {
+      if (heroDescription.scrollHeight > heroDescription.offsetHeight) {
+        showMoreBtn.classList.add('eleso-hero-section__button--visible');
+      } else {
+        showMoreBtn.classList.remove('eleso-hero-section__button--visible');
+      }
+    }
+
+    if(showMoreBtn){
+      showMoreBtn.addEventListener('click', toggleShowMore);
+      window.addEventListener('load', checkDescriptionHeight);
+      window.addEventListener('resize', checkDescriptionHeight);
+    }
+
+
+    const seeMoreBtns = document.querySelectorAll('.eleso-see-more-btn');
+    
+    if(seeMoreBtns){
+      seeMoreBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const contentSection = btn.closest('.eleso-aligned-image-block__text');
+          const hiddenTexts = contentSection.querySelectorAll('.eleso-content-text.eleso-hide');
+          const visibleTexts = contentSection.querySelectorAll('.eleso-content-text:not(.eleso-hide)');
+
+          if (btn.textContent === 'See More') {
+            hiddenTexts.forEach(text => {
+              text.classList.remove('eleso-hide');
+            });
+            btn.textContent = 'See Less';
+          } else {
+            visibleTexts.forEach(text => {
+              text.classList.add('eleso-hide');
+            });
+            btn.textContent = 'See More';
+          }
+        });
+      });
+    }
+
+
 
 });
 

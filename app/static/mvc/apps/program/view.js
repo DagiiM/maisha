@@ -1,5 +1,10 @@
 import View from '../../vitals/views/view.js';
 import getImageUrl from '../../vitals/utils/image_version.js';
+import { ContentSlider } from '../../vitals/components/content-slider.js';
+import { Lightbox } from '../../vitals/components/light-box.js';
+
+
+import { ActivitySlider } from './components/activity_slider.js';
 
 class ProgramView extends View{
     constructor(eventsystem){
@@ -23,141 +28,142 @@ class ProgramView extends View{
             };
     }
 
-   /*
-    ProgramContainer(data) {
-        const programs = data.results;
-      
-        programs.forEach(program => {
-          // Create HTML element for the program section
-          const programSection = document.createElement('article');
-          programSection.classList.add('eleso-theme-secondary-lighter', 'eleso-grid-item', 'eleso-box-shadow', 'eleso-border-round', 'eleso-border-2', 'eleso-mb-2', 'eleso-bg-white', 'eleso-hover-link-icon');
-          programSection.id = `program-${program.id}`; // Unique ID for scrolling
-      
-          // Add program content
-          programSection.innerHTML = `
-            <div class="eleso-p-2">
-              <h2 class="eleso-font-executive">${program.title}</h2>
-              <p class="eleso-font-subtle eleso-pt-1">${program.description}</p>
-              <a href="#activities" class="eleso-font-bold eleso-text-black eleso-link eleso-mtb-2 eleso-flex-button"><span class="eleso-mr-1">Read More</span> <i class="icon-arrow_right_alt eleso-ml-1 eleso-font-size-4 eleso-text-brand"></i></a>
-            </div>
-          `;
-      
-          // Create activities container within the program section
-          const activityContainer = document.getElementById('activities');
-      
-          // Loop through program's activities and create cards
-          program.activities.forEach(activity => {
-            const activityCard = this.createActivityCard(activity, program.id);
-            activityContainer.appendChild(activityCard);
-          });
 
-          // Append activities container to program section
-          
-          activityContainer.appendChild(activitiesContainer);
-      
-          // Append program section to the main container
-          const programContainer = document.getElementById('program-container');
-          programContainer.appendChild(programSection);
-        });
-      }
-      
-
-      
-*/
 
 ProgramContainer(data) {
     const programs = data.results;
-    const activitiesContainer = document.getElementById('activities');
-  
-    // Initially clear the activities container
-    activitiesContainer.innerHTML = '';
   
     programs.forEach(program => {
       // Create HTML element for the program section
-      const programSection = document.createElement('article');
-      programSection.classList.add('eleso-theme-secondary-lighter', 'eleso-grid-item', 'eleso-box-shadow', 'eleso-border-round', 'eleso-border-2', 'eleso-mb-2', 'eleso-bg-white', 'eleso-hover-link-icon');
-      programSection.id = `program-${program.id}`; // Unique ID for scrolling
-  
+      const programSection = document.createElement('div');
+      programSection.classList.add('eleso-theme-secondary-light', 'eleso-mb-2', 'eleso-hover-link-icon');
+      programSection.id = `program-${program.id}`;
+    
       // Add program content
       programSection.innerHTML = `
-        <div class="eleso-p-2">
-          <h2 class="eleso-font-executive">${program.title}</h2>
-          <p class="eleso-font-subtle eleso-pt-1">${program.description}</p>
-          <a href="#activities" class="eleso-font-bold eleso-text-black eleso-link eleso-mtb-2 eleso-flex-button"><span class="eleso-mr-1">Read More</span> <i class="icon-arrow_right_alt eleso-ml-1 eleso-font-size-4 eleso-text-brand"></i></a>
-        </div>
-      `;
-  
-      // Handle click event on "Read More" button
-      const readMoreButton = programSection.querySelector('.eleso-flex-button');
-      readMoreButton.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent default link behavior
-  
-        // Clear existing activities for this program
-        const programActivitiesContainer = activitiesContainer.querySelector(`#activities-container-${program.id}`);
-        if (programActivitiesContainer) {
-          programActivitiesContainer.innerHTML = '';
-        }else {
-            const newActivitiesContainer = document.createElement('article');
-            newActivitiesContainer.id = `activities-container-${program.id}`;
-            newActivitiesContainer.classList.add('eleso-grid-container','eleso-ptb-3','eleso-p-inline-4','eleso-p-1')
-            activitiesContainer.appendChild(newActivitiesContainer);
-          }
+        <article class="eleso-content-card eleso-theme-secondary-light">
+          <h3 class="eleso-content-card__header eleso-font-fancy eleso-font-gradient-shine">${program.title}</h3>
           
-        // Loop through program's activities and create cards
-        program.activities.forEach(activity => {
-          const activityCard = this.createActivityCard(activity, program.id);
-          programActivitiesContainer.appendChild(activityCard);
-        });
-  
-  
-        // Scroll to the activities container (adjust as needed)
-        programActivitiesContainer.scrollIntoView({ behavior: 'smooth' });
-      });
-  
-      // Append program section to the main container
+          <p class="eleso-content-card__body eleso-content-card__body--truncated">${program.description}</p>
+          
+          <!-- Add a container for the activity slider -->
+          <div class="activity-slider-container"></div>
+    
+          <div class="eleso-content-card__actions">
+            <button class="eleso-content-card__show-more">Show More</button>
+            <button class="eleso-content-card__show-less" style="display: none;">Show Less</button>
+            <!--
+            <a href="#activities" class="eleso-content-card__read-more">
+              <span>Read More</span>
+              <i class="icon-arrow_right_alt eleso-ml-1 eleso-font-size-4 eleso-text-brand"></i>
+            </a>
+            -->
+          </div>
+          <hr class="eleso-warm-line" style="width:20%;margin:25px auto;">
+        </article>
+      `;
+    
       const programContainer = document.getElementById('program-container');
-      programContainer.appendChild(programSection);
+      programContainer.append(programSection);
+    
+    // Check if the program has activities and activities is defined
+    if (program.activities && Array.isArray(program.activities) && program.activities.length > 0) {
+      // Initialize the ActivitySlider within the program card
+      // const activitySliderContainer = programSection.querySelector('.activity-slider-container');
+      let activities_conteiner = this.generateActivityHtmlContent(program.activities)
+      programSection.appendChild(activities_conteiner); // Append the activitySliderContainer to the DOM
+
+      //new ActivitySlider(activitySliderContainer, program.activities, this.createItemContent);
+    }
     });
+
   }
 
-  createActivityCard(activity, programId) {
-    const cardElement = document.createElement('article');
-    cardElement.classList.add('eleso-theme-secondary-lighter', 'eleso-grid-item', 'eleso-box-shadow', 'eleso-border-round', 'eleso-border-2', 'eleso-mb-2', 'eleso-bg-white', 'eleso-hover-link-icon');
-    cardElement.id = `activity-${programId}-${activity.id}`; // Unique ID for scrolling
-  
-    cardElement.innerHTML = `
-      <img src="${getImageUrl(activity.image.versions)}" alt="${activity.image.caption}" class="eleso-thumbnail-img eleso-br-2" loading="lazy">
-      <div class="eleso-p-2">
-        <h2 class="eleso-font-executive">${activity.title}</h2>
-        <p class="eleso-font-subtle eleso-pt-1 eleso-text-left">${activity.description}</p>
-      </div>
-    `;
-  
-    return cardElement;
+  generateActivityHtmlContent(data) {
+    const container = document.createElement('section');
+    container.className = 'eleso-theme-secondary-light';
+    //container.style.padding = '20px';
+
+    data.forEach((item, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'eleso-wrapper eleso-wrapper--large eleso-wrapper--section eleso-wrapper--layout eleso-grid eleso-aligned-image-block__wrapper';
+        let activity_image = `${getImageUrl(item.image.versions)}`;
+        if(activity_image){
+          const content = `
+          <div class="eleso-aligned-image-block__content">
+              <h3 class="eleso-aligned-image-block__title eleso-font-executive">${item.title}</h3>
+              <div class="eleso-aligned-image-block__text eleso-list eleso-list--blue">
+                  <p class="eleso-content-card__body eleso-content-card__body--truncated">${item.description}</p>
+                  <button class="eleso-see-more-btn">See More</button>
+              </div>
+          </div>
+      `;
+      
+
+      const image = `
+          <img alt="${item.title}" class="eleso-min-image eleso-lazy-animate--loaded" decoding="async" height="360" loading="lazy" src="${activity_image}" width="500">
+      `;
+      /*
+      if (index % 2 === 0) {
+          wrapper.innerHTML = image + content; // Image on the left
+      } else {
+          wrapper.innerHTML = content + image; // Image on the right
+      }
+      */
+     this.contentAlign(wrapper,index,image,content);
+    
+    }
+
+
+        container.appendChild(wrapper);
+    });
+
+    return container;
+}
+
+  contentAlign(wrapper, index, image, content){
+    const viewportWidth = document.documentElement.clientWidth;
+    if(viewportWidth >= 920){
+      if (index % 2 === 0) {
+        wrapper.innerHTML = image + content; // Image on the left
+    } else {
+        wrapper.innerHTML = content + image; // Image on the right
+    }
+    return wrapper
+    }else{
+      wrapper.innerHTML = image + content; // Image on the left
+      return wrapper
+    }
+    
   }
 
-  scrollToActivity(activitySectionId) {
-    // Extract program ID from section ID
-    const programId = activitySectionId.split('-')[1];
+  createItemContent(itemData, createElement) {
+    const container = createElement('div', 'slide-content', {}, '');
+    const title = createElement('h2', '', {}, itemData.title);
+    const description = createElement('p', '', {}, itemData.description);
   
-    // Find the program container element
-    const programContainer = document.getElementById(`program-${programId}`);
+    // Create a container for the activity slider
+    const activitySliderContainer = createElement('div', 'activity-slider-container');
   
-    // Find the activity section element within the program container
-    const activityElement = programContainer.querySelector(`#${activitySectionId}`);
+    // Initialize the ActivitySlider with the activity data
+    const activitySlider = new ActivitySlider('.activity-slider-container', itemData.activities, this.createItemContent);
   
-    // Scroll to the activity section
-    activityElement.scrollIntoView({ behavior: 'smooth' });
+    container.append(title, description, activitySliderContainer);
+    return container;
   }
-  
+
+ 
     AboutProgramContainer(data) {
       if(data[0]){
-        let p = document.querySelector('main #program-intro .about-program');
-        let image = document.querySelector('main #program-intro .about-program-image');
+        let introx = document.querySelector('main #program-intro');
+        let p = document.querySelector('main .eleso-hero-section__description');
+        let image = document.querySelector('main .eleso-hero-section img');
         
         p.innerHTML=`${data[0].content || 'No About Program Content Yet'}`
  
         if (data[0].image){
+          //introx.style=`background-image:url(${getImageUrl(data[0].image.versions)})`;
+ 
           image.src = `${getImageUrl(data[0].image.versions)}`;
           image.alt = `${data[0].image.caption}`;
         }
