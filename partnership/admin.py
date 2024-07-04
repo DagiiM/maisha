@@ -4,8 +4,8 @@ from app.admin import BaseAdmin
 
 @admin.register(Partner)
 class PartnerAdmin(BaseAdmin):
-    list_display = ['company_name','contact_person','partnership_date','logo']
+    list_display = ['company_name','contact_person','partnership_date','thumbnail','featured']
     
 @admin.register(TeamMember)
 class TeamAdmin(BaseAdmin):
-    list_display = ['user','role','image']
+    list_display = ['user','role','thumbnail','featured']

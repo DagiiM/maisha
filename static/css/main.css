@@ -72,6 +72,7 @@ a{
   /* Main Styles */
   main {
     background-color: #fff;
+    overflow:hidden;
   }
   
   /* Header and Footer Styles */

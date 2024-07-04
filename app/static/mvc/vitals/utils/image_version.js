@@ -11,7 +11,7 @@ const getImageUrl = (versions)=> {
         return versions.thumbnail;
     }
      else {
-        return versions.original || versions.file; // Use the original image if none of the conditions are met
+        return versions.file; // Use the original image if none of the conditions are met
     }
     
 }

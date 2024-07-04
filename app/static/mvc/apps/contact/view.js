@@ -39,13 +39,15 @@ class ContactView extends View{
         const email = document.createElement("div");
         email.classList.add("eleso-organization-card__email",'eleso-flex','eleso-p-2');
     
+        if(organization.image){
         const logo = document.createElement("div");
         logo.classList.add("eleso-organization-card__logo");
     
         const image = document.createElement("img");
-        image.src = organization.logo.image;
+        image.src = organization.image.image;
         image.classList.add("eleso-organization-card__logo-image");
         logo.appendChild(image);
+        }
     
         const address = document.createElement("div");
         address.classList.add("eleso-organization-card__address",'eleso-flex','eleso-p-2');

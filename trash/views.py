@@ -1,5 +1,5 @@
 from app.views import BaseViewSet
-from .serializers import TrashItemSerializer
+from .serializers import TrashSerializer
 
 class TrashViewSet(BaseViewSet):
-    serializer_class = TrashItemSerializer
+    serializer_class = TrashSerializer

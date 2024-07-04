@@ -1,0 +1,20 @@
+<div class="eleso-image-preview-widget">
+    <div class="eleso-image-preview-widget__preview-container">
+      {% if widget.value and widget.value.url %}
+      <a href="{{ widget.value.url }}" data-lightbox-id="{{ lightbox_id }}">
+        <img src="{{ widget.value.url }}" class="eleso-image-preview-widget__preview-image" />
+      </a>
+      {% else %}
+      <p class="eleso-image-preview-widget__no-image">No image selected</p>
+      {% endif %}
+    </div>
+    <div class="eleso-image-preview-widget__file-input-container">
+      <input type="file" name="{{ widget.name }}" id="{{ widget.attrs.id }}">
+      {% if not widget.is_required %}
+      <div class="eleso-image-preview-widget__remove-image">
+        <input type="checkbox" name="{{ widget.name }}-clear" id="{{ widget.attrs.id }}-clear_id">
+        <label for="{{ widget.attrs.id }}-clear_id">Remove image</label>
+      </div>
+      {% endif %}
+    </div>
+  </div>

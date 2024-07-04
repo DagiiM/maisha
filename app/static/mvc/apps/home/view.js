@@ -2,6 +2,12 @@ import View from '../../vitals/views/view.js';
 import {createCarouselComponent} from '../../vitals/components/carousel.js';
 import ColorGenerator from '../../vitals/components/color.js';
 import getImageUrl from '../../vitals/utils/image_version.js';
+
+import { corporateCarousel } from '../../vitals/components/corporate-carousel.js';
+import { ContentSlider } from '../../vitals/components/content-slider.js';
+import { Lightbox } from '../../vitals/components/light-box.js';
+
+
 class HomeView extends View{
     constructor(eventsystem){
         super(eventsystem);
@@ -36,7 +42,12 @@ class HomeView extends View{
             url : 'api/team/',
             method : 'fetch',
             containerMethod : this.TeamContainer.bind(this),
-        },
+        },            
+        activity : {
+          url : 'api/activities',
+          method : 'fetch',
+          containerMethod : this.createActivitySliderContent.bind(this),
+      },
             
         howItWorks : {
           url : 'api/organization-steps/',
@@ -47,10 +58,10 @@ class HomeView extends View{
     }
 
 
+     
       QuotesContainer(data){
         createCarouselComponent(document.querySelector(".slider-quote"), data.results, 'quote')
       }
-
       TeamContainer(data){
         const xdata = data.results
         const mini_container = document.querySelector(".team-section")
@@ -105,7 +116,7 @@ class HomeView extends View{
         mini_container.appendChild(sectionTitle)
         mini_container.appendChild(parentElement)
       }
-
+/*
        getCarouselContainer(data) {
         const carousel = document.querySelector(".slider-images");
         const newElement = document.createElement('div')
@@ -115,7 +126,10 @@ class HomeView extends View{
         carousel.appendChild(newElement);
         return newElement;
       }
-
+*/
+      getCarouselContainer(data) {
+        new corporateCarousel(data);
+      }
 
       createMaishaPartnersSection(data) {
         const mini_container = document.querySelector(".partner-section")
@@ -149,29 +163,29 @@ class HomeView extends View{
 
         result.forEach((item, index) => {
           const card = document.createElement('div');
-          card.classList.add('eleso-grid-item','eleso-p-3','eleso-mtb-2','eleso-font-subtle','eleso-border-round','eleso-box-shadow','eleso-theme-secondary-light');
+          card.classList.add('eleso-grid-item','eleso-p-3','eleso-mtb-2','eleso-font-subtle','eleso-border-round','eleso-box-shadow');
       
           // Get the background color of the container
-          //const containerStyles = getComputedStyle(container);
-          //const containerBgColor = containerStyles.backgroundColor;
+          const containerStyles = getComputedStyle(container);
+          const containerBgColor = containerStyles.backgroundColor;
 
           // Generate a random color for the card title
-          //const colorGenerator = new ColorGenerator();
+          const colorGenerator = new ColorGenerator();
 
           //const titleColor = colorGenerator.getRandomColor(containerBgColor);
           const description = document.createElement('p');
           description.innerHTML = `${item.description}`;
       
           const title = document.createElement('h4');
-          title.classList.add('eleso-font-casual','eleso-p-2')
+          title.classList.add('eleso-p-2','eleso-font-bold','eleso-text-brand')
           title.innerHTML = `${item.title}`;
 
-          //const backgroundColor = colorGenerator.generateRandomContrastingColor();
-          c//ard.style.backgroundColor = backgroundColor;
-          //card.style.color = colorGenerator.getContrastingColor(containerBgColor);
+          const backgroundColor = colorGenerator.generateRandomContrastingColor();
+          //card.style.backgroundColor = backgroundColor;
+          //title.style.color = colorGenerator.getContrastingColor(backgroundColor);
       
           // Set a unique border color for each card
-          //card.style.borderColor = card.style.color;
+          card.style.borderColor = backgroundColor;
 
           card.append(description, title);
           section.appendChild(card);
@@ -181,7 +195,81 @@ class HomeView extends View{
 
       }
     
+      createActivitySliderContent(data) {
+
+        let activities = data.results;
+        const sliderContainer = document.querySelector('.eleso-slider');
+        const contentSliderElement = document.createElement('div');
+        contentSliderElement.classList.add('eleso-content-slider');
+
+        activities.forEach((result) => {
+          let item = document.createElement('article');
+          item.classList.add('eleso-slide', 'eleso-m-2', 'eleso-p-1');
+      
+          // Create the slide content
+          let slideContent = document.createElement('div');
+          slideContent.classList.add('slide-content');
+      
+          // Add the title
+          let title = document.createElement('h2');
+          title.textContent = result.title;
+      
+          // Add the description
+          let description = document.createElement('p');
+          description.textContent = result.description;
+          description.classList.add('description');
+      
+          // Add the "Show More/Less" button
+          let showMoreButton = document.createElement('button');
+          showMoreButton.classList.add('show-more-button');
+          showMoreButton.textContent = 'Show More';
+          showMoreButton.addEventListener('click', () => {
+            description.classList.toggle('expanded');
+            showMoreButton.textContent = description.classList.contains('expanded') ? 'Show Less' : 'Show More';
+          });
+      
+          // Set the background image
+          item.style.backgroundImage = `url(${getImageUrl(result.image.versions)})`;
+          item.style.backgroundSize = 'cover';
+          item.style.backgroundPosition = 'center';
+      
+          /*
+          // Add the lightbox trigger
+          let lightboxTrigger = document.createElement('a');
+          lightboxTrigger.href = result.image.file;
+          lightboxTrigger.classList.add('eleso-slide', 'lightbox-trigger');
+          lightboxTrigger.setAttribute('data-lightbox-id', `lightbox-${result.title.replace(/\s/g, '-')}`);
+          lightboxTrigger.appendChild(slideContent);
+          */
+      
+          // Append the elements to the slide content
+          slideContent.appendChild(title);
+          slideContent.appendChild(description);
+          slideContent.appendChild(showMoreButton);
+          item.appendChild(slideContent);
+          // Append the lightbox trigger to the contentSliderElement
+          contentSliderElement.appendChild(item);
+        });
+        const lightbox = new Lightbox();
+        sliderContainer.appendChild(contentSliderElement);
+ 
+        const optionsSlider = new ContentSlider(sliderContainer, {
+          customOffset: 1,
+          initialSlide: 0,
+          autoSlide: true,
+          autoSlideDelay: 5000,
+          transitionDuration: 1000,
+          loop: true,
+          navigation: true,
+          pagination: true,
+          touchSwipe: true,
+          responsive: true
+        });
+
+        return optionsSlider
+      }
     
+
       
       createPartnerContainer(data) {
         const results = data.results;
@@ -192,19 +280,21 @@ class HomeView extends View{
         // Loop through the results and create a card for each partner
         results.forEach(partner => {
           // Create a card element
-          const card = document.querySelector('.partner-section .eleso-grid-container .eleso-grid-item');
+          const card = document.querySelector('.partner-section .eleso-grid-container');
+          card.classList.add('eleso-justify-items-center')
       
-          // Create an image element for the logo
-          const logoImg = document.createElement('img');
-          logoImg.src = getImageUrl(partner.logo.versions); // Replace with your actual image URL
-          logoImg.setAttribute('loading', 'lazy');
-          logoImg.classList.add('eleso-image-logo','eleso-m-3');
-          logoImg.alt = partner.company_name;
-      
+
+          if(partner.image){
+            // Create an image element for the logo
+            const logoImg = document.createElement('img');
+            logoImg.src = getImageUrl(partner.image.versions); // Replace with your actual image URL
+            logoImg.setAttribute('loading', 'lazy');
+            logoImg.classList.add('eleso-image-logo','eleso-m-1','eleso-grid-item');
+            logoImg.alt = partner.company_name;
           // Append the image and company name to the card
           card.appendChild(logoImg);
-      
-          // Append the card to the container
+          }
+
           //container.appendChild(card);
         });
       

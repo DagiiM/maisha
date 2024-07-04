@@ -1,4 +1,5 @@
 import View from '../../vitals/views/view.js';
+import getImageUrl from '../../vitals/utils/image_version.js';
 
 class OrganizationView extends View{
     constructor(eventsystem){
@@ -18,11 +19,16 @@ class OrganizationView extends View{
 
     organization(data) {
         if(data[0]){
-            this.container.innerHTML = data[0].content;
-        }
-        else{
-            console.log('No About Organization Content Yet')
-        }
+            let p = document.querySelector('main #maisha-intro .about-maisha');
+            let image = document.querySelector('main #maisha-intro .about-maisha-image');
+            
+            p.innerHTML=`${data[0].content || 'No About Maisha Content Yet'}`
+     
+            if (data[0].image){
+              image.src = `${getImageUrl(data[0].image.versions)}`;
+              image.alt = `${data[0].image.caption}`;
+            }
+          }
 
     }
 }

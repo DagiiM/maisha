@@ -5,7 +5,7 @@ class DonateView extends View{
     constructor(eventsystem){
         super(eventsystem);
         this.container = document.querySelector('.eleso-organization-contact');
-
+      /*
         this.endpoints = {
           ...this.endpoints,
             quotes : {
@@ -15,6 +15,7 @@ class DonateView extends View{
             }
             
           };
+          */
     }
 
       QuotesContainer(data){

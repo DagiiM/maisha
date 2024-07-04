@@ -99,11 +99,20 @@ class View {
           let mobile_mobile_number = document.querySelector('mobile .contact-hotline .mobile-mobile_phone');
           let mobile_email = document.querySelector('mobile .contact-hotline .mobile-email');
 
-          mobile_number.innerText=`${contact_info.phone}`
-          email.innerText=`${contact_info.email}`
+          if(mobile_number){
+            mobile_number.innerText=`${contact_info.phone}`
+          }
+          if(email){
+            email.innerText=`${contact_info.email}`
+          }
 
-          mobile_mobile_number.innerText=`${contact_info.phone}`
+          if(mobile_mobile_number){
+            mobile_mobile_number.innerText=`${contact_info.phone}`
+          }
+
+          if(mobile_email){
           mobile_email.innerText=`${contact_info.email}`
+          }
           
           let maisha_mission_section_p = document.querySelector('.maisha-mission-section p');
           if(maisha_mission_section_p){
@@ -121,7 +130,6 @@ class View {
             address.innerHTML = `<i class="icon-map"></i> : <p>${organization.address.postal_code}, State: ${organization.address.state}, City: ${organization.address.city} </p>`;
             phone.innerHTML = `<i class="icon-phone_enabled"></i> : <a href="tel:${contact_info.phone}" class="eleso-link" aria-label="Call Us">${contact_info.phone}</a>`;
         
-
           }
       }
       else{

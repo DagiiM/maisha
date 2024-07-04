@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from .models import Image, Document, Video
+from .models import Image, Document, Video, Icon
 from django.conf import settings
+from app.serializers import BaseSerializer
 
-class ImageSerializer(serializers.ModelSerializer):
+class ImageSerializer(BaseSerializer):
     versions = serializers.SerializerMethodField()
 
     class Meta:
@@ -24,12 +25,17 @@ class ImageSerializer(serializers.ModelSerializer):
             ret['file'] = request.build_absolute_uri(settings.MEDIA_URL + str(instance.file))
         return ret
 
-class DocumentSerializer(serializers.ModelSerializer):
+class DocumentSerializer(BaseSerializer):
     class Meta:
         model = Document
         fields = '__all__'
 
-class VideoSerializer(serializers.ModelSerializer):
+class IconSerializer(BaseSerializer):
+    class Meta:
+        model = Icon
+        fields = '__all__'
+        
+class VideoSerializer(BaseSerializer):
     poster = ImageSerializer()
     class Meta:
         model = Video

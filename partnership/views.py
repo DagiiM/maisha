@@ -7,9 +7,17 @@ from about.serializers import AboutSerializer
 from django.contrib.contenttypes.models import ContentType
 from .models import Partner
 
-class PartnerViewSet(BaseViewSet):
+class PartnershipViewSet(BaseViewSet):
+      def get_queryset(self):
+            queryset = super().get_queryset()
+            return queryset.filter(featured=True)
+        
+class PartnerViewSet(PartnershipViewSet):
     serializer_class = PartnerSerializer
-    
+
+class TeamViewSet(PartnershipViewSet):
+    serializer_class = TeamMemberSerializer
+        
 class RecentVerifiedAboutPartnersView(ListAPIView):
     serializer_class = AboutSerializer
 
@@ -21,5 +29,3 @@ class RecentVerifiedAboutPartnersView(ListAPIView):
             #object_id=your_object_id  # Replace 'your_object_id' with the ID of the related object
         ).order_by('-id')[:1]
         
-class TeamViewSet(BaseViewSet):
-    serializer_class = TeamMemberSerializer

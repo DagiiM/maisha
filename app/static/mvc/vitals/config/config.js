@@ -1,5 +1,5 @@
 const config = {
-    API_BASE_URL: 'http://127.0.0.1:8001',//'https://a7bc-102-219-209-182.ngrok-free.app', // Your API base URL
+    API_BASE_URL: 'http://172.105.77.24',//'https://a7bc-102-219-209-182.ngrok-free.app', // Your API base URL
     DEFAULT_HEADERS: {
       'Content-Type': 'application/json', // Default content type
       // You can add more default headers here
@@ -21,4 +21,4 @@ export function loadCSS(cssFileName) {
   }
 
   export default config;
-  
+

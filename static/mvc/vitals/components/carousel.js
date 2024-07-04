@@ -180,7 +180,7 @@ function createCarouselComponent(carouselContainer, imagesData,contentType='imag
 
     function addImagesFromJson(jsonData) {
         jsonData.forEach((item) => {
-            const imageUrl = getImageUrl(item.versions);
+            const imageUrl = item.versions.social;// getImageUrl(item.versions);
             const description = item.caption;
             addImageToCarousel(imageUrl, description);
         });

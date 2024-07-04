@@ -15,6 +15,9 @@ def ways_to_support(request):
 def why_maisha(request):
     return render(request,'why_maisha.html')
 
+def service(request):
+    return render(request,'services.html')
+
 def contact(request):
     return render(request,'contact.html')
 
@@ -36,3 +39,10 @@ def completed(request):
 
 def canceled(request):
     return render(request,'donations/cancelled.html')
+
+def design(request):
+    return render(request,'design.html')
+
+
+def privacy_policy(request):
+    return render(request,'privacy_policy.html')

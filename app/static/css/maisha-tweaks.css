@@ -1,4 +1,4 @@
-@media (max-width:767px){
+@media (max-width:991px){
   .nav-left{
       width:100%;
   }
@@ -9,8 +9,12 @@
       width: 15%;
   }
 }
+.eleso-clip-path-top{
+  clip-path: polygon(69% 4%, 100% 0%, 100% 100%, 0 100%, 0 0);
+}
 
-@media (min-width:768px){
+
+@media (min-width:992px){
   .contact-hotline{
       width:50%;
   }
@@ -18,6 +22,8 @@
       width:50%;
   }
 }
+
+
 
 .example-element {
   /* Set other styles as needed */
@@ -42,8 +48,22 @@ animation: gradientAnimation 15s ease infinite;
 
 
 .hero-section.slider-images .carousel-container{
-width: 320px;
-height: 180px;
+width: 98%;
+height: 350px;
+}
+
+.hero-section.slider-images .carousel-container .image-description{
+font-size:var(--font-size-large);
+}
+
+@media (min-width:992px){
+.hero-section.slider-images .carousel-container{
+width: 1080px;
+height: 100vh;
+}
+.hero-section.slider-images .carousel-container .image-description{
+margin-bottom:20vh;
+}
 }
 
 .hero-section.slider-images .carousel-container .carousel-image img{
@@ -60,7 +80,12 @@ font-size: 0.8rem !important;
 
 .eleso-thumbnail-img{
 width: 100%;
-max-width: 250px !important;
+/*max-width: 250px !important;*/
 height: 250px !important;
 object-fit: cover;
+}
+
+.eleso-app-layout .home-page .partner-section .eleso-image-logo {
+  width: 150px;
+  height: 150px;
 }

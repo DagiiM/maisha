@@ -129,7 +129,7 @@ ProgramContainer(data) {
       <img src="${getImageUrl(activity.image.versions)}" alt="${activity.image.caption}" class="eleso-thumbnail-img eleso-br-2" loading="lazy">
       <div class="eleso-p-2">
         <h2 class="eleso-font-executive">${activity.title}</h2>
-        <p class="eleso-font-subtle eleso-pt-1">${activity.description}</p>
+        <p class="eleso-font-subtle eleso-pt-1 eleso-text-left">${activity.description}</p>
       </div>
     `;
   
@@ -152,8 +152,15 @@ ProgramContainer(data) {
   
     AboutProgramContainer(data) {
       if(data[0]){
-        let p = document.querySelector('main #program-intro > p');
-        p.innerHTML=`${data[0].content || 'No About Us Content Yet'}`
+        let p = document.querySelector('main #program-intro .about-program');
+        let image = document.querySelector('main #program-intro .about-program-image');
+        
+        p.innerHTML=`${data[0].content || 'No About Program Content Yet'}`
+ 
+        if (data[0].image){
+          image.src = `${getImageUrl(data[0].image.versions)}`;
+          image.alt = `${data[0].image.caption}`;
+        }
       }
     }
 }

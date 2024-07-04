@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from app.views import BaseViewSet
+from .serializers import EventSerializer
 
-# Create your views here.
+class EventViewSet(BaseViewSet):
+    serializer_class = EventSerializer

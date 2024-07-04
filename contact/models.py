@@ -7,8 +7,6 @@ class Contact(BaseModel):
     email = models.EmailField(verbose_name="Email Address", unique=True)
     message = models.TextField(default="", verbose_name="Message")
     subscribed = models.BooleanField(default=False, verbose_name="Subscribed to Newsletter")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated At")
 
     class Meta:
         verbose_name = "Contact"
@@ -22,6 +20,10 @@ class Address(BaseModel):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     postal_code = models.CharField(max_length=10)
+    
+    class Meta:
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
 
     def delete(self, using=None, keep_parents=False):
         """
@@ -29,10 +31,21 @@ class Address(BaseModel):
         """
         super().delete(using=using, keep_parents=keep_parents)
         
+    def __str__(self):
+        return f"{self.street} {self.city} {self.state} {self.postal_code}"
+        
 class ContactInformation(BaseModel):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     website = models.URLField()
+ 
+    class Meta:
+        verbose_name = "ContactInformation"
+        verbose_name_plural = "Contact Information"   
+
+    def __str__(self):
+        return f"{self.phone} ({self.email})"    
+    
 
 class Organization(BaseModel):
     name = models.CharField(max_length=100)
@@ -40,9 +53,9 @@ class Organization(BaseModel):
     mission = models.TextField()
     vision = models.TextField()
     values = models.TextField()
-    address = models.OneToOneField(Address, on_delete=models.CASCADE)
-    contact_info = models.OneToOneField(ContactInformation, on_delete=models.CASCADE)
-    logo = models.OneToOneField(Image, on_delete=models.CASCADE, null=True, blank=True)
+    address = models.OneToOneField(Address, on_delete=models.PROTECT)
+    contact_info = models.OneToOneField(ContactInformation, on_delete=models.PROTECT)
+    image = models.OneToOneField(Image, on_delete=models.PROTECT, null=True, blank=True)
     video = models.ForeignKey(Video,on_delete=models.SET_NULL,null=True,blank=True)
     
     def save(self, *args, **kwargs):
@@ -54,7 +67,9 @@ class Organization(BaseModel):
     def delete(self, *args, **kwargs):
         # Prevent deletion of the single instance
         pass
-
+    
+    def __str__(self):
+        return f"{self.name}"
 
 class OrganizationStep(BaseModel):
     title = models.CharField(max_length=255)
@@ -72,6 +87,8 @@ class Subscription(BaseModel):
         verbose_name = "Subscription"
         verbose_name_plural = "Subscriptions"
 
+    def __str__(self):
+        return f"{self.contact}"
 
 class Quote(BaseModel):
     text = models.TextField()

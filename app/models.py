@@ -1,66 +1,41 @@
-from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.fields import GenericRelation,GenericForeignKey
 from search.models import SearchableModel
-from trash.models import TrashItem
-from django.db.models.signals import pre_delete
-from django.dispatch import receiver
+from trash.models import Trash,SoftDeleteModel
+
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
-class BaseModel(models.Model):
-    trash_items = GenericRelation(TrashItem)
-    soft_deleted = models.BooleanField(default=False)
 
+class Manager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().filter(is_deleted=False)#,deleted_at__isnull=True)
+
+    
+class BaseModel(SoftDeleteModel,SearchableModel):
+    trash_items = GenericRelation(Trash)
+    is_deleted = models.BooleanField(default=False, verbose_name='Deleted')
+    
+    objects = Manager()
+    
     class Meta:
         abstract = True
-
-    def delete(self, using=None, keep_parents=False):
-        """
-        Override the delete method to perform soft deletion.
-        """
-        self.soft_deleted = True
-        self.save(using=using)
-        TrashItem.objects.create(
-        content_object=self
-        )
-
-    def hard_delete(self, using=None, keep_parents=False):
-        """
-        Method for hard deletion (completely removing from the database).
-        """
-        super().delete(using=using, keep_parents=keep_parents)
         
-    def restore(self):
+    def validate_start_end_dates(self, value):
         """
-        Restore a soft-deleted instance.
+        Validate that the provided value (date or datetime) is not in the past.
+        Raises a ValidationError if the value is in the past.
         """
-        self.soft_deleted = False
-        self.save()
-
-    class Manager(models.Manager):
-        def get_queryset(self):
-            return super().get_queryset().filter(soft_deleted=False)
-
-    objects = Manager()
+        if value < timezone.now():
+            raise ValidationError('Start date cannot be in the past.')
 
 
-@receiver(pre_delete,sender=BaseModel)
-def soft_delete_handler(sender, instance, **kwargs):
-    """
-    Signal handler to soft-delete instances of models that inherit from Base.
-    """
-    print("1. Soft delete Handler")
-    if isinstance(instance, BaseModel):
-        instance.soft_delete()
-
-@receiver(pre_delete, sender=BaseModel)
-def trash_item_creation_handler(sender, instance, **kwargs):
-    """
-    Signal handler to create TrashItem when an instance is soft-deleted.
-    """
-    print("1. Trash Creation..")
-    TrashItem.objects.create(
-        content_object=instance
-    )
-
-# Connect the signal handlers to the appropriate signals
-pre_delete.connect(soft_delete_handler, sender=BaseModel)
-pre_delete.connect(trash_item_creation_handler, sender=BaseModel)
+class SharedModel(BaseModel):
+    content = models.TextField()
+    content_type = models.ForeignKey(ContentType,on_delete=models.CASCADE,help_text='The content type of the target model.')
+    object_id = models.PositiveIntegerField(help_text='The ID of the target model.')
+    related_object = GenericForeignKey('content_type','object_id')   
+    
+    class Meta:
+        abstract = True

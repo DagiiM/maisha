@@ -1,18 +1,209 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <script type="module" src="{% static '/mvc/apps/donate/app.js' %}"></script>
-    <div class="eleso-container">
-      <section class="contact-container eleso-grid-container-col-1 eleso-align-items-center eleso-justify-items-center" style="padding:1% 4%">
-            <div class="eleso-organization-contact eleso-grid-item" style="--text-align:left"></div>
+<style>
 
+.infotainment {
+    padding: 4em 0;
+    background: #ffc80b;
+    position: relative;
+    color: #3804c1
+}
+.infotainment {
+    padding: 4em 2em;
+    background: var(--theme-primary); 
+    position: relative;
+    color: #3804c1;
+    width: calc(100% - 4em);
+}
+@media screen and (max-width: 46em) {
+    .infotainment {
+        padding:2em;
+    }
+}
+
+.infotainment h2 {
+    color: #3804c1
+}
+
+.infotainment p {
+    color: #1b0260;
+    font-family: "sharp-sans",Montserrat,Verdana,sans-serif;
+    font-weight: 500
+}
+
+.infotainment .left-illustration {
+    text-align: left;
+    padding-left: 400px;
+    background-image: url("/static/icons/transparency-background.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: 310px 248px;
+    -moz-background-size: 310px 248px;
+    background-size: 310px 248px
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5),(min--moz-device-pixel-ratio: 1.5),(-o-min-device-pixel-ratio: 3/2),(min-device-pixel-ratio: 1.5),(min-resolution: 1.5dppx),(min-width: 1600px) {
+    .infotainment .left-illustration {
+        background-image:url("/static/icons/transparency-background.png")
+    }
+}
+
+@media screen and (max-width: 46em) {
+    .infotainment .left-illustration {
+        padding:230px 1em 0;
+        text-align: center;
+        background-size: 275px 220px;
+        background-position: 50% 0
+    }
+}
+
+.infotainment .left-illustration h4 {
+    color: #1b0260;
+    margin: 1rem 0;
+    font-weight: bold;
+    letter-spacing: 0
+}
+
+.infotainment .right-illustration {
+    text-align: left;
+    padding-right: 480px;
+    background-image: url("/static/icons/transparency-background.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: 434px 300px;
+    -moz-background-size: 434px 300px;
+    background-size: 434px 300px;
+    background-position: 530px 0
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5),(min--moz-device-pixel-ratio: 1.5),(-o-min-device-pixel-ratio: 3/2),(min-device-pixel-ratio: 1.5),(min-resolution: 1.5dppx),(min-width: 1600px) {
+    .infotainment .right-illustration {
+        background-image:url("/static/icons/transparency-background.png")
+    }
+}
+
+@media screen and (max-width: 46em) {
+    .infotainment .right-illustration {
+        padding:230px 1em 0;
+        text-align: center;
+        background-size: 360px 249px;
+        background-position: 50% 0
+    }
+}
+
+.label-link,.label-link:link,.label-link:visited {
+    background-color: rgba(33,33,33,0.05);
+    height: 40px;
+    line-height: 40px;
+    font-size: .875rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    border-radius: 1rem;
+    display: inline-block;
+    color: #414142;
+    padding: 0 1em;
+    -webkit-transition-property: all;
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    transition-property: all;
+    -webkit-transition-duration: .15s;
+    -moz-transition-duration: .15s;
+    -o-transition-duration: .15s;
+    transition-duration: .15s;
+    -webkit-transition-timing-function: cubic-bezier(0.2, 0, 0.04, 1);
+    -moz-transition-timing-function: cubic-bezier(0.2, 0, 0.04, 1);
+    -o-transition-timing-function: cubic-bezier(0.2, 0, 0.04, 1);
+    transition-timing-function: cubic-bezier(0.2, 0, 0.04, 1)
+}
+
+.label-link:hover,.label-link:focus,.label-link:link:hover,.label-link:link:focus,.label-link:visited:hover,.label-link:visited:focus {
+    text-decoration: none;
+    background-color: rgba(33,33,33,0.1);
+    color: #212121
+}
+
+.label-link:active,.label-link.loading,.label-link:link:active,.label-link.loading:link,.label-link:visited:active,.label-link.loading:visited {
+    text-decoration: none;
+    background-color: rgba(33,33,33,0.2)
+}
+
+.charity-rating-list {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.charity-rating-list li {
+    margin: 0 0 1rem;
+    font-family: "sharp-sans",Montserrat,Verdana,sans-serif;
+    font-size: .875rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-right: .5em
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto
+}
+
+@media screen and (max-width: 46em) {
+    .container {
+        padding:0 1em
+    }
+}
+
+    </style>
+
+    <script type="module" src="{% static '/mvc/apps/donate/app.js' %}"></script>
+    <div class="eleso-container "></div>
+
+
+      <section class="contact-container eleso-align-items-center eleso-justify-items-center"style="background-color:var(--theme-primary)">
+        <div class="eleso-donate-welcome-section eleso-theme-secondary">
+            <div class="eleso-donate-welcome-content eleso-p-inline-max eleso-ptb-max">
+              <h2 class="eleso-donate-welcome-title">
+                <span class="eleso-font-fancy eleso-font-gradient-shine">Support Our Girls By Donating Today!</span>
+              </h2>
+              <p class="eleso-donate-welcome-description eleso-font-subtle">
+                Your kindness and generosity can truly make a difference in the lives of those who need it most. We appreciate your support and thank you for considering a donation today.
+              </p>
+              <div class="eleso-grid-container-col-1">
+                <div class="eleso-grid-item eleso-m-inline-1 eleso-box-shadow">
+                  <div class="donation-card">
+                    <img src="{% static 'icons/mpesa-logo.png' %}" style="height:80px;max-width:60%" alt="mpesa logo" loading="lazy" srcset="">
+                    <div class="mpesa-paybill-section">
+                      <div class="mpesa-section-label">PAYBILL</div>
+                      <div class="mpesa-section-value">123456</div>
+                    </div>
+                    <div class="mpesa-account-section">
+                      <div class="mpesa-section-label">ACCOUNT</div>
+                      <div class="mpesa-section-value">789012</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="eleso-grid-item eleso-m-inline-1 eleso-box-shadow">
+                    <img src="{% static 'icons/paypal.png' %}" style="height:auto;max-width:60%" alt="mpesa logo" loading="lazy" srcset="">
+                
+                  <p class="eleso-mtb-2 eleso-m-inline-1  eleso-font-subtle">Donate using your PayPal account.</p>
+                  <a href="https://www.paypal.com/donate/?hosted_button_id=BUHHJ9TUH2QRJ" class="eleso-btn-link">Donate via PayPal</a>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+        <!--   
+        <div class="eleso-organization-contact eleso-grid-item" style="--text-align:left"></div>
+                    
                   <section class="donate-section eleso-grid-item"  style="--text-align:left" id="donationSection">
-                        <!-- Progress Bar -->
                         <div class="progress-container">
                             <div class="progress-bar" id="progressBar" style="width: 0;"></div>
                         </div>
                 
-                        <!-- Payment Methods Section -->
+                       
                         <div class="donation__container" id="paymentMethodSection">
                             <form class=" eleso-form" id="paymentMethodForm" action="#" method="post">
                               <h2 class="donation__sub-title eleso-font-casual">How would you like to donate? </h2>
@@ -20,13 +211,13 @@
                                   <label class="donation__method eleso-flex eleso-mtb-1">
                                       <input type="radio" name="payment-method" id="paypal" class="eleso-mr-1" value="paypal" checked>
                                       <img src="{% static 'icons/paypal.png' %}" alt="PayPal" class="donation__method-img eleso-ml-1" loading='lazy'>
-                                       <!--<span class="donation__method-text">PayPal</span>-->
+                                       
                                   </label>
                                   
                                   <label class="donation__method eleso-flex eleso-mtb-1">
                                       <input type="radio" name="payment-method" id="mpesa" class="eleso-mr-1" value="mpesa">
                                       <img src="{% static 'icons/mpesa.png' %}" alt="PayPal" class="donation__method-img eleso-ml-1" loading='lazy'>
-                                      <!--<span class="donation__method-text">Mpesa</span>-->
+                               
                                   </label>
                                   <label class="donation__method eleso-flex">
                                       <input type="radio" name="payment-method" class="eleso-mr-1" value="other">
@@ -37,7 +228,7 @@
                             </form>
                         </div>
                 
-                        <!-- Details Section -->
+                    
                         <div class="donation__container" id="detailsSection" style="display: none;">
                             <form class="donation__form eleso-form eleso-theme-secondary-lighter eleso-box-shadow eleso-border-round subscribe-form__fancy" id="detailsForm" action="#" method="post">
                       
@@ -55,29 +246,29 @@
                                     <label for="message">Message (optional):</label>
                                     <textarea class="donation__textarea eleso-textarea" id="message" name="message" placeholder="Message" rows="4"></textarea>
                                   <div class="button-flex">
-                                    <button id="previousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button> <!-- Add Previous button -->
+                                    <button id="previousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button> 
+                                    
                                     <button id="detailsButton" class="eleso-button eleso-border-round eleso-mtb-2">Next <i class="icon-arrow_right"></i> </button>
                                   </div>   
 
                               </form>
                         </div>
                 
-                        <!-- Specific Payment Method Pages -->
+                       
                         <div class="donation__container" id="paypalMethodSection" style="display: none;">
-                            <!-- PayPal Payment Method Page -->
+                            
                             <h2 class="eleso-font-casual">Pay with PayPal</h2>
                             <p class="eleso-font-subtle eleso-mtb-2">Please complete your PayPal payment to support our cause.</p>
-                            <!-- Include PayPal integration here or any specific payment method content -->
                             <div  class="button-flex">
-                              <button id="paypalPreviousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button> <!-- Add Previous button -->
-                              
+                              <button id="paypalPreviousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button>
+                                                           
                               <button id="paypalSubmitButton" class="eleso-button eleso-border-round eleso-mtb-2"><a href="https://www.sandbox.paypal.com/donate/?hosted_button_id=AVSBCSJX9B8WS">Donate Now</a></button>
                             </div>
                         </div>
                 
                         <div class="donation__container" id="mpesaMethodSection" style="display: none;">
                                 <form class="eleso-form eleso-theme-secondary-lighter eleso-box-shadow eleso-border-round subscribe-form__fancy">
-                                        <!-- Mpesa Payment Method Page -->
+                                        
                                         <h2 class="eleso-font-casual">Lipa na Mpesa</h2>
                                         <p class="eleso-font-subtle eleso-mtb-2">Please complete your Mpesa payment to support our cause.</p>
                                         <label class="donation__label" for="mobile">Mobile Number:</label>
@@ -85,15 +276,29 @@
                                 
                                         <label class="donation__label" for="amount">Amount:</label>
                                         <input type="number" class="donation__input  eleso-input" id="amount" name="amount"  placeholder="Amount" required>
-                                        <!-- Include Mpesa payment integration here or any specific payment method content -->
                                     <div class="button-flex">
-                                        <button id="mpesaPreviousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button> <!-- Add Previous button -->
+                                        <button id="mpesaPreviousButton" class="eleso-button eleso-border-round eleso-mtb-2"><i class="icon-arrow_left"></i> Previous</button> 
                                         <button id="mpesaSubmitButton" class="eleso-button eleso-border-round eleso-mtb-2">Submit</button>
                                     </div>
                             </form>
                         </div>
                     </section>
+              -->  
       </section>
+   
+
+      <section class="infotainment integrity eleso-grid-container-col-1">
+        <div class="container left-illustration">
+            <h2>Transparency &amp; Efficiency</h2>
+            <p class="subheader">We know that you care about how effectively your donation is being used. We write a newsletter of all events and plans of the program activities.</p>
+            <h4>We value every coin donated for the various program. We share periodic newsletters. You can register with us to get such</h4>
+            <ul class="charity-rating-list">
+                <li>
+                <a href="/contact" class="label-link" target="" title="">Contact Us</a>
+            </li>
+        </ul>
+    </div>
+    </section>
 
 </div>
 

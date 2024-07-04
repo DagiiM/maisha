@@ -7,7 +7,7 @@ from rest_framework import serializers
 from .models import OrganizationStep
 
 
-class OrganizationStepSerializer(serializers.ModelSerializer):
+class OrganizationStepSerializer(BaseSerializer):
     class Meta:
         model = OrganizationStep
         fields = '__all__'
@@ -36,7 +36,7 @@ class ContactInformationSerializer(BaseSerializer):
 class OrganizationSerializer(BaseSerializer):
     address = AddressSerializer()
     contact_info = ContactInformationSerializer()
-    logo = ImageSerializer()
+    image = ImageSerializer()
     video = VideoSerializer()
 
     class Meta:

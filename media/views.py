@@ -1,4 +1,4 @@
-from .serializers import ImageSerializer, DocumentSerializer, VideoSerializer
+from .serializers import ImageSerializer, DocumentSerializer, VideoSerializer, IconSerializer
 from app.views import BaseViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -27,3 +27,7 @@ class DocumentViewSet(BaseViewSet):
 
 class VideoViewSet(BaseViewSet):
     serializer_class = VideoSerializer
+
+
+class IconViewSet(BaseViewSet):
+    serializer_class = IconSerializer

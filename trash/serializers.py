@@ -1,7 +1,7 @@
 from app.serializers import BaseSerializer
-from .models import TrashItem
+from .models import Trash
 
-class TrashItemSerializer(BaseSerializer):
+class TrashSerializer(BaseSerializer):
     class Meta:
-        model = TrashItem
+        model = Trash
         fields = '__all__'

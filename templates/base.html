@@ -11,9 +11,10 @@
   <link rel="stylesheet" href="{% static 'css/maisha.css' %}">
   <link rel="stylesheet" href="{% static 'css/maisha-tweaks.css' %}">
   <link async rel="stylesheet" href="{% static 'eleso-v1.0/eleso-fonts.css' %}">
-  <link rel="icon" href="{% static 'icons/favicon.svg' %}" type="image/x-icon"> 
+  <link rel="icon" href="{% static 'icons/favicon.svg' %}" type="image/x-icon" sizes="32*32"> 
   <script async type="text/javascript" src="{% static 'js/main.js' %}"></script>
   <script async type="text/javascript" src="{% static 'js/video.js' %}"></script>
+  {% block maisha_code_style %} {% endblock %}
   
 <!-- jQuery -->
 <!--

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from app.admin import BaseAdmin
-from .models import Program, Activity
+from .models import Program, Activity,Service
 
 @admin.register(Program)
 class ProgramAdmin(BaseAdmin):
@@ -10,7 +10,13 @@ class ProgramAdmin(BaseAdmin):
 
 @admin.register(Activity)
 class ActivityAdmin(BaseAdmin):
-    list_display = ('title', 'program', 'image')
+    list_display = ('title', 'program', 'thumbnail')
     search_fields = ('title', 'program__title')
     list_filter = ('program',)
+
+@admin.register(Service)
+class ServiceAdmin(BaseAdmin):
+    list_display = ('title', 'description', 'thumbnail')
+    search_fields = ('title',)
+    
 

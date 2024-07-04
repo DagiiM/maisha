@@ -1,27 +1,35 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+<style>
+@media (max-width: 767px) {
+  .eleso-aligned-image-block__content {
+      padding: 5px;
+  }
+ }
+  </style>
+
       <script type="module" src="{% static '/mvc/apps/program/app.js' %}"></script>  
   
 
-<div class="eleso-ptb-2 eleso-theme-secondary-light">
-      <div id="program-intro" class="eleso-ptb-2">
-            <h1 class="eleso-font-executive eleso-typing-effect eleso-text-center eleso-mtb-2 eleso-font-size-4">
-                  <span id="text" class="eleso-font-gradient-shine">Our Programs</span><span id="cursor">|</span>
-                </h1>
-        <p class="eleso-font-subtle eleso-mb-4 eleso-p-inline-4 eleso-text-center">Program About Placeholder</p>
-      </div>
+          <section class="eleso-hero-section eleso-p-inline-max eleso-ptb-max">
+            <div class="eleso-wrapper eleso-wrapper--large eleso-wrapper--section eleso-wrapper--layout eleso-grid eleso-aligned-image-block__wrapper">
+                <img alt="" class="eleso-hero-section__image eleso-aligned-image-block__image eleso-lazy-animate--loaded" height="360" loading="lazy" src="" width="500">
+                <div class="eleso-aligned-image-block__content">
+                    <h3 class="eleso-hero-section__title eleso-aligned-image-block__title">Our Programs</h3>
+                    <div class="eleso-aligned-image-block__text eleso-list eleso-list--blue">
+                        <p class="eleso-hero-section__description eleso-content-card__body--truncated">This section has the image on the right and the text content on the left.</p>
+                        <button class="eleso-see-more-btn">See More</button>
+                    </div>
+                </div>
+            </div>
+        
+        </section>
 
-      <section id="program-container" class="eleso-grid-container eleso-ptb-3 eleso-p-inline-4 eleso-p-1">
+<div class="eleso-theme-secondary-light eleso-p-inline-max eleso-ptb-max">
+      <section id="program-container" class="eleso-mtb-3 sarabun-medium" style="max-width:98vw">
       </section>
-</div>
-                         
-<div class="eleso-pb-2 eleso-theme-secondary-light">
-   <ul class="eleso-theme-secondary-lighter eleso-flex eleso-font-executive eleso-styled-list eleso-p-2">
-      <li class="eleso-p-3"><a href="" class="eleso-animated-underline-link">Program Activities</a></li>
-   </ul>
-    <section id="activities">
-    </section>
 </div>
 
     {% endblock %}

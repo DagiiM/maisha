@@ -5,6 +5,8 @@ from django.db.models.deletion import ProtectedError
 import sys,json,os
 from django.contrib.auth.models import User
 from contact.models import Quote
+from decouple import config
+from about.models import SystemSettings
 
 class Command(BaseCommand):
     help = 'Seeds the database with initial data'
@@ -28,7 +30,8 @@ class Command(BaseCommand):
 
             seed_functions = [
                create_admin_users,
-               create_quotes
+               create_quotes,
+               seed_system_settings
             ]
 
             for seed_function in seed_functions:
@@ -39,7 +42,6 @@ class Command(BaseCommand):
 
 def clear_data():
     models_to_clear = [
-        #'claims.ClaimType',
         User,
         Quote
     ]
@@ -114,3 +116,44 @@ def create_quotes():
                 print(f"Quote '{text}' already exists.")
         except Exception as e:
             print(f"An error occurred: {str(e)}")
+            
+
+def seed_system_settings():
+    system_settings = {
+        'site_title': config('APP_NAME', default='My Dashboard'),
+        'primary_color': config('PRIMARY_COLOR', default='#007bff'),
+        'secondary_color': config('SECONDARY_COLOR', default='#6c757d'),
+        'email_from': config('EMAIL_HOST_USER', default='noreply@maishagirlssafehouse.org'),
+        'email_host': config('EMAIL_HOST', default='smtp.gmail.com'),
+        'email_port': config('EMAIL_PORT', cast=int, default=587),
+        'email_username': config('EMAIL_HOST_USER', default='your_smtp_username'),
+        'email_password': config('EMAIL_HOST_PASSWORD', default='your_smtp_password'),
+        'enable_email_notifications': config('ENABLE_EMAIL_NOTIFICATIONS', cast=bool, default=True),
+        'notification_email_recipients': config('NOTIFICATION_EMAIL_RECIPIENTS', default='admin@maishagirlssafehouse.org'),
+        'use_original_images': config('USE_ORIGINAL_IMAGES', cast=bool, default=True),
+        'image_quality': config('IMAGE_QUALITY', cast=int, default=80),
+        'image_max_size': config('IMAGE_MAX_SIZE', cast=int, default=1024),
+        'enable_caching': config('ENABLE_CACHING', cast=bool, default=True),
+        'cache_timeout': config('CACHE_TIMEOUT', cast=int, default=3600),
+        'cache_backend': config('CACHE_BACKEND', default='redis'),
+        'log_level': config('LOG_LEVEL', default='INFO'),
+        'log_file_path': config('LOG_FILE_PATH', default='/var/log/dashboard.log'),
+        'log_file_size_limit': config('LOG_FILE_SIZE_LIMIT', cast=int, default=1048576),
+        'enable_two_factor_auth': config('ENABLE_TWO_FACTOR_AUTH', cast=bool, default=False),
+        'allowed_ip_ranges': config('ALLOWED_IP_RANGES', default='192.168.1.0/24,10.0.0.0/16'),
+        'session_timeout': config('SESSION_TIMEOUT', cast=int, default=30),
+        'data_retention_period': config('DATA_RETENTION_PERIOD', cast=int, default=30),
+        'enable_data_archiving': config('ENABLE_DATA_ARCHIVING', cast=bool, default=True),
+        'archive_storage_location': config('ARCHIVE_STORAGE_LOCATION', default='s3://my-dashboard-archive'),
+        'maintenance_mode': config('MAINTENANCE_MODE', cast=bool, default=False)
+    }
+
+    try:
+        with transaction.atomic():
+            settings, created = SystemSettings.objects.get_or_create(id=1, defaults=system_settings)
+            if created:
+                print("System settings seeded successfully.")
+            else:
+                print("System settings already exist.")
+    except Exception as e:
+        print(f"An error occurred while seeding system settings: {str(e)}")

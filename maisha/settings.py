@@ -6,21 +6,13 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-PAYPAL_MODE = config('PAYPAL_MODE')  # sandbox or live
-PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
-PAYPAL_CLIENT_SECRET = config('PAYPAL_CLIENT_SECRET')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG=False#config('DEBUG')
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -37,31 +29,19 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'media',
     'partnership',
-    'blog',
-    'comments',
+    #'blog',
+    #'comments',
+    'django_q',
     'search',
     'trash',
     'rest_framework',
-    'mpesa',
     'contact',
     'programs',
-    'sslserver'
+    'sslserver',
+    'events'
 ]
 
 # Configure SSL settings
-
-MPESA_CONFIG = {
-    'CONSUMER_KEY': 'yIqAbNZV3tOaGFz22IqwLSkcCDyzNAZa',
-    'CONSUMER_SECRET': 'trG0bSNuroErKB2Y',
-    'CERTIFICATE_FILE': None,
-    'HOST_NAME': 'https://7220-197-179-245-152.ngrok-free.app/mpesa/submit/',
-    'PASS_KEY': 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
-    'SAFARICOM_API': 'https://sandbox.safaricom.co.ke',
-    'AUTH_URL': '/oauth/v1/generate?grant_type=client_credentials',
-    'SHORT_CODE': '174379',
-    'TILL_NUMBER': None,
-    'TRANSACTION_TYPE': 'CustomerBuyGoodsOnline',
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -210,4 +190,18 @@ CKEDITOR_CONFIGS = {
         'skin': 'office2013',
         'width': '100%',
     },
+}
+
+Q_CLUSTER = {
+    'name': 'maisha',
+    'workers': 2,
+    'timeout': 90,
+    'retry': 120,
+    'queue_limit': 50,
+    'bulk': 10,
+    'orm': 'default',
+    'label': 'Queued Tasks',
+    'django_redis': 'default'
+    #'scheduler': 'django_q.schedulers.CronScheduler',
+    #'schedule': 'detect_duplicates(*, 0 0 * * *)',  # Run daily at midnight
 }

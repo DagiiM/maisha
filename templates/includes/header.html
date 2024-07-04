@@ -1,12 +1,12 @@
 {% load static %}
+<!--
+<header class="eleso-header-reset eleso-fle eleso-align-items-center eleso-justify-content-space-between eleso-font-subtle">
+    <section class="eleso-flex eleso-ptb-3 eleso-align-items-center eleso-justify-content-space-between eleso-theme-secondary-lighter">
 
-<header class="eleso-fle eleso-align-items-center eleso-justify-content-space-between eleso-font-subtle">
-    <section class="eleso-flex eleso-align-items-center eleso-justify-content-space-between eleso-theme-secondary-lighter">
-
-        <nav class="nav-left eleso-flex eleso-align-items-center eleso-justify-space-between" style="max-width:100%;min-width:50%">
-            <div class="nav-left-logo eleso-flex eleso-align-items-center">
+        <nav class="nav-left eleso-flex eleso-align-items-center eleso-justify-space-between" style="max-width:100%;min-width:48%">
+            <div class="nav-left-logo eleso-header-reset-bg eleso-flex eleso-align-items-center">
                 <a href="{% url 'welcome' %}"><img class="eleso-image-logo" src="{% static 'icons/logo.svg' %}" loading="lazy" alt="Maisha Girls Safe House" srcset=""></a>
-                <span id="text" class="eleso-font-gradient eleso-font-size-2">Maisha Girls Safe House</span><span id="cursor">|</span>
+                <span id="text" class="eleso-text-brand eleso-font-size-2 eleso-font-bold">Maisha Girls Safe House</span>
              </div>
             <nav class="nav-right eleso-flex eleso-m-inline-4">
                 <i class="icon-cancel eleso-ml-1 eleso-font-size-4 eleso-text-brand"></i>
@@ -15,14 +15,14 @@
         </nav>
 
 
-        <nav class="contact-hotline eleso-flex eleso-justify-content-space-between eleso-p-2 eleso-align-items-center">
+        <nav class="contact-hotline eleso-header-reset-bg eleso-flex eleso-justify-content-space-between eleso-p-2 eleso-align-items-center">
             <div class="eleso-grid eleso-justify-items-start">
                 <div class="eleso-flex">
                     <i class="icon-phone eleso-font-size-2 eleso-m-3 eleso-text-brand"></i>
                 
                     <span class="eleso-grid-container-col-1 eleso-p-1 eleso-align-items-center eleso-justify-items-start">
                         <div class="eleso-flex eleso-flex-column">
-                            <span class="eleso-font-regular eleso-font-gradient">Call Us:</span>  
+                            <span class="eleso-font-regular eleso-font-bold">Call Us:</span>  
                             <span class="eleso-flex mobile_number"></span>
                         </div>
                     </span>
@@ -35,7 +35,7 @@
 
                     <span class="eleso-grid-container-col-1 eleso-p-1 eleso-align-items-center eleso-justify-items-start">
                         <div class="eleso-flex eleso-flex-column">
-                            <span class="eleso-font-regular eleso-font-gradient">Mail Us:</span>  
+                            <span class="eleso-font-regular  eleso-font-bold">Mail Us:</span>  
                             <span class="email"></span>
                         </div>
                     </span>
@@ -46,16 +46,16 @@
 
     </section>
 
-        <section class="eleso-flex eleso-m-2 eleso-align-items-center eleso-justify-content-space-between eleso-styled-list eleso-p-inline-4">
+        <section class="nav nav-absolute eleso-flex eleso-m-2 eleso-theme-primary eleso-align-items-center eleso-justify-content-space-between eleso-styled-list eleso-p-inline-4"
+        style="padding: 10px;color:var(--theme-light) !important;">
             <nav class="nav-middle eleso-font-regular">
-                <ul class="eleso-flex eleso-align-items-center eleso-styled-list">
-                    <li><a href="{% url 'about' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">About</a> </li>
-                    <li><a href="{% url 'program' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Programs</a></li>
-                    <li><a href="{% url 'program' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Services</a></li>
-                    <li><a href="{% url 'why_maisha' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Why Us?</a></li>
-                    <li><a href="{% url 'contact' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Contact</a></li>
-                    <li class=""><a href="{% url 'ways_to_support' %}"  class="eleso-btn-link eleso-m-inline-2 eleso-p-inline-1">Donate</a></li>
-                    <!--<li><a href="{% url 'blog' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2">Blog</a></li>-->
+                <ul class="eleso-header-reset-bg eleso-flex eleso-align-items-center eleso-styled-list">
+                    <li><a href="{% url 'about' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2" style="color:var(--theme-light)">About</a> </li>
+                    <li><a href="{% url 'program' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2" style="color:var(--theme-light)">Programs</a></li>
+                    <li><a href="{% url 'service' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2" style="color:var(--theme-light)">Services</a></li>
+                    <li><a href="{% url 'why_maisha' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2" style="color:var(--theme-light)">Why Us?</a></li>
+                    <li><a href="{% url 'contact' %}"  class="eleso-animated-underline-link eleso-m-inline-2 eleso-p-2" style="color:var(--theme-light)">Contact</a></li>
+                    <li class=""><a href="{% url 'ways_to_support' %}"  class="eleso-btn-link eleso-m-inline-2 eleso-p-inline-1" style="color:var(--theme-light)">Donate <i class="icon-arrow_right"></i></a></li>
             
                 </ul>
             </nav>
@@ -69,7 +69,7 @@
     <section class="eleso-flex eleso-flex-column">
 
         <nav class="nav-left eleso-grid eleso-align-center eleso-justify-items-center">
-            <img class="eleso-image-logo" src="{% static 'icons/logo.svg' %}" loading="lazy" alt="Maisha Girls Safe House" srcset="" style="width:80px;height:80px">
+            <a href="{% url 'welcome' %}"><img class="eleso-image-logo" src="{% static 'icons/logo.svg' %}" loading="lazy" alt="Maisha Girls Safe House" srcset=""></a>
         </nav>
 
         
@@ -80,10 +80,9 @@
             <ul class="eleso-grid eleso-justify-items-start eleso-styled-list">
                 <li class="eleso-p-3 " style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'about' %}"  class="eleso-link">About</a> </li>
                 <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'program' %}"  class="eleso-link">Programs</a></li>
-                <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'program' %}"  class="eleso-link">Services</a></li>
+                <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'service' %}"  class="eleso-link">Services</a></li>
                 <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'why_maisha' %}"  class="eleso-link">Why Us?</a></li>
                 <li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'contact' %}"  class="eleso-link">Contact</a></li>
-                <!--<li class="eleso-p-3" style="border-bottom:1px solid var(--theme-secondary-light)"><a href="{% url 'blog' %}"  class="eleso-link">Blog</a></li>-->
         
             </ul>
         </nav>
@@ -133,29 +132,314 @@
         </section>
 
 </mobile>
-
-<!--
-    <header style="display:noe">
-    <nav class="nav-left">
-        <img class="logo" src="{% static 'icons/logo.svg' %}" alt="Maisha Girls Safe House" srcset="">
-        <div class="logo-text">Maisha Girls Safe House</div>
-    </nav>
-    <nav class="nav-middle">
-        <ul>
-            <li><a href="{% url 'about' %}">About</a> </li>
-            <li><a href="{% url 'program' %}">Programs</a></li>
-            <li><a href="{% url 'program' %}">Services</a></li>
-            <li><a href="{% url 'why_maisha' %}">Why Us?</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-            <li ><a href="{% url 'ways_to_support' %}" style="background-color: var(--brand-color-alt);color:var(--brand-light); padding: 0.4rem 2rem;">Donate</a></li>
-            <li><a href="{% url 'blog' %}">Blog</a></li>
-            <li><a href="https://www.sandbox.paypal.com/donate/?hosted_button_id=AVSBCSJX9B8WS">Donate</a></li>
-       
-    </ul>
-</nav>
-<nav class="nav-right">
-    <i class="icon-cancel"></i>
-    <i class="icon-menu"></i>
-</nav>
-</header>
 -->
+
+
+<style>
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px;
+    width: calc(100% - 40px) !important;
+}
+
+
+.navbar a {
+    text-decoration: none !important;
+    position: relative;
+}
+
+.navbar .right {
+    display: flex;
+    align-items: center;
+}
+.navbar .links {
+    display: flex;
+    align-items: center;
+}
+.navbar .right a {
+    margin-left: 15px;
+}
+
+.navbar .right a:first-child {
+    margin-left: 0;
+}
+
+.navbar .right .login {
+    padding: 5px 10px;
+    border: 1px solid var(--theme-dark);
+    border-radius: 5px;
+}
+
+.navbar .menu-btn {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--theme-secondary-light);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    transition: 0.3s;
+}
+
+
+
+.eleso-link-round{
+    padding: 10px;
+    border-radius: 40px;
+    background-color: transparent;
+    border: 5px solid transparent;
+}
+.eleso-link-round:hover{
+    background-color: var(--theme-secondary);
+    border: 5px solid var(--theme-secondary-light);  
+}
+.sidebar a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 20px;
+    margin-top: 13px;
+    z-index: 1000;
+    border: 1px solid #ddd;
+    min-width:300px;
+  
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, .05), 0 12px 16px -4px rgba(0, 0, 0, .1);
+    border: 1px solid #e0d9ff;
+    border-radius: 8px;
+}
+.sidebar .dropdown {
+    left:1%;
+    width:98%;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.sidebar .dropdown-content{
+    min-width: 80%;
+    z-index:1000;
+  width: 100px;
+  position: relative;
+  margin-top: 1px;
+
+}
+
+.dropdown-content a {
+    color: var(--theme-dark);
+    padding: 10px 0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--theme-secondary-light);
+}
+
+.dropdown-content .submenu-title {
+    font-weight: bold;
+}
+
+.description {
+    font-size: 12px;
+    color: var(--theme-dark);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 36px;
+}
+
+@media (max-width: 992px) {
+    .navbar .menu-btn {
+        display: block;
+    }
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .navbar .links, .navbar .right {
+        margin-top: 10px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar a {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+}
+@media (min-width: 993px) {
+    .sidebar {
+        display: none; /* Hide sidebar on large screens */
+    }
+}
+</style>
+
+<div class="navbar eleso-theme-secondary">
+    <div class="nav-left-logo eleso-header-reset-bg eleso-flex eleso-align-items-center">
+        <a href="{% url 'welcome' %}"><img class="eleso-image-logo" src="{% static 'icons/logo.svg' %}" loading="lazy" alt="Maisha Girls Safe House" srcset=""></a>
+        <span id="text" class="eleso-text-brand eleso-font-size-1 eleso-font-bold">Maisha Girls Safe House</span>
+     </div>
+    <span class="menu-btn" onclick="openNav()">&#9776;</span>
+    <div class="links eleso-font-subtle">
+        <div class="dropdown">
+            <a href="#" class="eleso-link eleso-link-round eleso-font-bold">Who We Are  <i class="icon-keyboard_arrow_down"></i></a>
+            <div class="dropdown-content eleso-theme-secondary-lighter">
+                <div class="submenu-title">About Us</div>
+                <a href="{% url 'why_maisha' %}">
+                    <div>
+                        Why Save the Girls?
+                        <p class="description">We host several program activities.</p>
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+        
+        <div class="dropdown eleso-link" style="margin-left:20px;">
+            <a href="#" class="eleso-link eleso-link-round eleso-font-bold">What We Do  <i class="icon-keyboard_arrow_down"></i> </a>
+            <div class="dropdown-content eleso-theme-secondary-lighter">
+                <div class="submenu-title">What do we do?</div>
+                <a href="{% url 'program' %}">
+                    <div>
+                        Our Programs 
+                        <p class="description">We host several program activities.</p>
+                    </div>
+                </a>
+                <a href="{% url 'service' %}">
+                    <div>
+                        Our Services
+                        <p class="description">We offer a couple of services to our beneficiaries.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="dropdown eleso-link" style="margin-left:20px;">
+            <a href="#" class="eleso-link eleso-link-round eleso-font-bold">Get Involved  <i class="icon-keyboard_arrow_down"></i></a>
+            <div class="dropdown-content eleso-theme-secondary-lighter">
+                <div class="submenu-title">Contact Us</div>
+                <a href="{% url 'contact' %}">
+                    <div>
+                        Subscribe to Our Newsletter
+                        <p class="description">Get latest updates on our events and program activities.</p>
+                    </div>
+                </a>
+                <a href="{% url 'ways_to_support' %}">
+                    <div>
+                        Make a Donation
+                        <p class="description">Support Our Various Program activities to support our mission </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="right">
+        <a href="/" class="eleso-link eleso-link-round eleso-font-bold">Help</a>
+        <a href="/admin" class="login">Log in</a>
+    </div>
+</div>
+
+<section id="mySidebar" class="sidebar eleso-font-subtle">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+   
+        <div class="dropdown eleso-link">
+            <a href="#" class="eleso-link eleso-link-round eleso-font-bold">Who We Are  <i class="icon-keyboard_arrow_down"></i></a>
+            <div class="dropdown-content eleso-theme-secondary-lighter">
+                <div class="submenu-title">About Us</div>
+                <a href="{% url 'why_maisha' %}">
+                    <div>
+                        Why Maisha 
+                        <p class="description">We host several program activities.</p>
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+        
+        <div class="dropdown eleso-link">
+            <a href="#" class="eleso-link eleso-link-round eleso-font-bold">What We Do  <i class="icon-keyboard_arrow_down"></i></a>
+            <div class="dropdown-content eleso-theme-secondary-lighter">
+                <div class="submenu-title">What do we do?</div>
+                <a href="{% url 'program' %}">
+                    <div>
+                        Our Programs 
+                        <p class="description">We host several program activities.</p>
+                    </div>
+                </a>
+                <a href="{% url 'service' %}">
+                    <div>
+                        Our Services
+                        <p class="description">We offer a couple of services to our beneficiaries.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="dropdown eleso-link">
+            <a href="#" class="eleso-link eleso-link-round eleso-font-bold">Get Involved <i class="icon-keyboard_arrow_down"></i></a>
+            <div class="dropdown-content eleso-theme-secondary-lighter">
+                <div class="submenu-title">Contact Us</div>
+                <a href="{% url 'contact' %}">
+                    <div>
+                        Subscribe to Our Newsletter
+                        <p class="description">Get latest updates on our events and program activities.</p>
+                    </div>
+                </a>
+                <a href="{% url 'ways_to_support' %}">
+                    <div>
+                        Make a Donation
+                        <p class="description">Support Our Various Program activities to support our mission </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+    <div class="right">
+        <a href="/" class="eleso-link eleso-link-round eleso-font-bold eleso-ml-1">Help</a>
+        <a href="/admin" class="login eleso-link eleso-border eleso-ml-2 eleso-border-round eleso-text-center" style="width:100px">Log in</a>
+    </div>
+</section>
+
+
+<script>
+function openNav() {
+    document.getElementById("mySidebar").style.width = "300px"; /* Adjust to desired width */
+}
+
+function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+}
+    </script>

@@ -3,6 +3,7 @@ from media.serializers import ImageSerializer
 from .models import Partner,TeamMember
 from django.contrib.auth.models import User
 from contact.serializers import ContactInformationSerializer
+
 class UserSerializer(BaseSerializer):
     class Meta:
         model = User
@@ -11,7 +12,7 @@ class UserSerializer(BaseSerializer):
 
         
 class PartnerSerializer(BaseSerializer):
-    logo = ImageSerializer()
+    image = ImageSerializer()
     contact_info = ContactInformationSerializer()
     class Meta:
         model = Partner
